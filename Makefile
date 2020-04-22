@@ -10,7 +10,8 @@ LMXI:=	$(LMXD)/inc
 INC		=	ush.h
 INCS	=	$(addprefix $(INCD)/, $(INC))
 SRC		=	main.c mx_loop.c mx_create_head.c mx_tok.c \
-			mx_treefull.c mx_check_line.c
+			mx_treefull.c mx_check_line.c mx_init_shell.c \
+			mx_push_variable.c mx_ex_param.c 
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))
