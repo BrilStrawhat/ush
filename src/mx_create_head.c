@@ -35,6 +35,6 @@ t_head *mx_create_head(char *line) {
                 mx_pushtree(&forest, tok[i]);
         }
     }
-     mx_printforest(forest);
+    mx_printforest(forest);
     return forest;
 }
