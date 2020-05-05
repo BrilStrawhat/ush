@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include "libmx.h"
 #include <string.h>
+#include <sys/types.h>
+#include <regex.h>
+#include <math.h>
 
 #define BUFSIZE 1024
 
