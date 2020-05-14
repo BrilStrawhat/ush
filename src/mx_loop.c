@@ -7,7 +7,6 @@ static char *read_line(void) {
     getline(&tmp, &bufsize, stdin);
     return tmp;
 }
-
 void mx_loop(t_head *head) {
     char *line = NULL;
     int status = 0;
@@ -16,7 +15,8 @@ void mx_loop(t_head *head) {
     mx_init_shell(shell);
     while (1) {
         mx_printstr("u$h> ");
-        line = read_line();
+        line = read_line(); 
+        line[strlen(line)-1] = '\0';
         if (line) {
             if (mx_check_line(line) == 1) {
                 mx_printstr("syntax error\n");
@@ -29,10 +29,14 @@ void mx_loop(t_head *head) {
                 mx_printerr("error param {}\n");// after error
                 continue;
             }
+           //mx_tilda(&line);
+           //mx_printstr(line);
             head = mx_create_head(line);
             
-            if (head) {
-                mx_printstr("HELLo");
+            //mx_printforest(head);
+            if (line != NULL) {
+                mx_launch_cmd(head, shell);
+                continue;
             }
         }
     }

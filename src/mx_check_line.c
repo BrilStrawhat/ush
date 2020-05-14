@@ -34,6 +34,5 @@ int mx_check_line(char *line) {
         }
         flag = 1;
     }
-
     return 0;
 }

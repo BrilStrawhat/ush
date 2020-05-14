@@ -75,11 +75,23 @@ static void init_shlvl(t_shell *shell) {
 
 }
 
+static char **mx_init_builtin() {
+    char **builtins = malloc(6 * sizeof(char *));
+    builtins[0] = "pwd";
+    builtins[1] = "env";
+    builtins[2] = "which";
+    builtins[3] = "echo";
+	builtins[4] = "cd";
+    builtins[5] = NULL;
+    return builtins;
+}
+
 void mx_init_shell(t_shell *shell) {
     shell->pwd = get_pwd();
     shell->variables = get_variables();
     shell->export_variables = get_export();
     init_shlvl(shell);
+    shell->builtins = mx_init_builtin();
     //printf("SHLVL %s\n", getenv("SHLVL"));
     //printf("PWD- %s\n", shell->pwd);
 }

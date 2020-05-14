@@ -7,9 +7,13 @@
 #include "libmx.h"
 #include <string.h>
 #include <sys/types.h>
+<<<<<<< HEAD
 #include <regex.h>
 #include <math.h>
+
+=======
 #include <dirent.h>
+>>>>>>> add root / parse tilda/ need to add builtins
 #define BUFSIZE 1024
 
 typedef struct s_variables {

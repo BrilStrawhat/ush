@@ -13,7 +13,10 @@ INC		=	ush.h
 INCS	=	$(addprefix $(INCD)/, $(INC))
 SRC		=	main.c mx_loop.c mx_create_head.c mx_tok.c \
 			mx_treefull.c mx_check_line.c mx_init_shell.c \
-			mx_push_variable.c mx_ex_param.c 
+			mx_push_variable.c mx_ex_param.c mx_tilda.c \
+			mx_ex_join.c mx_back_slesh.c mx_check_quotes.c \
+			mx_fill_str.c mx_launch_cmd.c mx_launch_init.c \
+			mx_find_cmd.c mx_start.c 
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))

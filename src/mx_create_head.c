@@ -3,9 +3,10 @@
 void mx_printforest(t_head *forest) {
     while (forest) {
         while (forest->command) {
-            if (forest->command->cmd)
+            if (forest->command->cmd) {
                 mx_printstr(forest->command->cmd);
-            mx_printchar('\n');
+                mx_printchar('\n');
+            }
             if (forest->command->or != NULL) {
                 forest->command = forest->command->or;
                 continue;
@@ -23,7 +24,8 @@ t_head *mx_create_head(char *line) {
     char **tok = NULL;
     t_head *forest = NULL;
 
-    tok = mx_tok(line);
+    tok = mx_tok(line); // разбиваем строчку на ;
+
     if (tok) {
         for (int i = 0; tok[i]; i++) {
             if (forest == NULL) {
@@ -31,10 +33,10 @@ t_head *mx_create_head(char *line) {
                 forest->command = mx_treefull(tok[i]);
                 forest->next = NULL;
             }
-            else 
+            else
                 mx_pushtree(&forest, tok[i]);
         }
     }
-    mx_printforest(forest);
+    //mx_printforest(forest);
     return forest;
 }
