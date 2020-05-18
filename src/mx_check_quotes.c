@@ -30,7 +30,7 @@ int mx_check_quotes(char *line, char delim) {
         if (line[i] == delim) 
             return i;
     }
-    return 100;          
+    return 100;
 }
 
 

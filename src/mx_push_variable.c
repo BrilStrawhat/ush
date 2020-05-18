@@ -1,6 +1,6 @@
 #include "ush.h"
 
-static t_variables *create_node(void *name, void *value) {
+static t_variables *create_node(char *name, char *value) {
     t_variables *node =  (t_variables *)malloc(sizeof(t_variables));
 
     node->name = strdup(name);

@@ -18,13 +18,14 @@ static char *get_pwd(void) {
 }
 
 static char *strfdup(char *str, int n) {
-    char *res = malloc(strlen(str) - n);
+    char *res = malloc(strlen(str) - n + 1);
     int y = 0;
 
     for (int i = n; str[i]; i++) {
         res[y] = str[i];
         y++;
     }
+    res[y] = '\0';
     return res;
 }
 
@@ -59,20 +60,17 @@ static t_variables *get_export(void) {
 
 static void init_shlvl(t_shell *shell) {
     char *shlvl = getenv("SHLVL");
-    char *tmp = NULL;
+    char *result = NULL;
     int lvl = 0;
 
     if (shlvl == NULL)
-        shlvl = strdup("1");
+        result = strdup("1");
     else {
         lvl = atoi(shlvl) + 1;
-        tmp = mx_itoa(lvl);
-        shlvl = strdup(tmp);
-        free(tmp);
+        result = mx_itoa(lvl);
     }
-    mx_push_variable(&shell->variables, "SHLVL", shlvl);
-    setenv("SHLVL", shlvl, 1);
-
+    mx_push_variable(&shell->variables, "SHLVL", result);
+    setenv("SHLVL", result, 1);
 }
 
 static char **mx_init_builtin() {
