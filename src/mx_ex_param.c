@@ -70,11 +70,14 @@ static void ex_join(char *line, char *old_str, char **new_str) {
             if (cup != NULL) {
                 for (int j = 0; cup[j]; j++)
                     (*new_str)[i++] = cup[j];
-                i += mx_strlen(old_str) + 3;
+                y += mx_strlen(old_str) + 2;
             }
         }
-        (*new_str)[i++] = line[y];
+        else if (line[y]) {
+            (*new_str)[i++] = line[y];
+        }
     }
+    //mx_printstr((*new_str));
 }
 
 char *mx_ex_param(char *line) {
@@ -90,11 +93,11 @@ char *mx_ex_param(char *line) {
             ex_join(line, result, &res);
         }
     }
-    else if (count == -1)
+    else if (count == -1) {
+        mx_strdel(&line);
         return NULL;
+    }
     else 
         res = line;
-
-    //mx_printstr(res);
     return res;
 }
