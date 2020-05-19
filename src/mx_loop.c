@@ -10,7 +10,7 @@ static char *read_line(void) {
 void mx_loop(t_head *head) {
     char *line = NULL;
     int status = 0;
-    t_shell *shell = (t_shell *)malloc(sizeof(t_shell));
+    //t_shell *shell = (t_shell *)malloc(sizeof(t_shell));
 
     // mx_init_shell(shell);
     while (1) {
@@ -23,12 +23,17 @@ void mx_loop(t_head *head) {
                 status = 258;// errno
                 continue;
             }
+
         // line = valid ${}
             line = mx_ex_param(line);
+            //mx_printstr(line);
+            //mx_printchar('\n');
+ 
             if (!line) {
                 mx_printerr("error param {}\n");// after error
                 continue;
             }
+               /*
            //mx_tilda(&line);
            //mx_printstr(line);
             head = mx_create_head(line);
@@ -37,7 +42,7 @@ void mx_loop(t_head *head) {
             if (line != NULL) {
                 mx_launch_cmd(head, shell);
                 continue;
-            }
+            }*/
         }
     }
 }

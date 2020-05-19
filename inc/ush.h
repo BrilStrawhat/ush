@@ -10,6 +10,7 @@
 #include <regex.h>
 #include <math.h>
 #include <dirent.h>
+
 #define BUFSIZE 1024
 
 typedef struct s_variables {
