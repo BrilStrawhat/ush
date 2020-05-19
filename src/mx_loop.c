@@ -43,9 +43,6 @@ void mx_loop(t_head *head) {
                 mx_launch_cmd(head, shell);
                 continue;
             }*/
-            if (head) {
-
-            }
         }
     }
 }
