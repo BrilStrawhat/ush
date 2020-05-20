@@ -28,6 +28,8 @@ static char* open_braces(char *line, int beg, int end) {
     int len = end - beg;
     char *res = mx_strnew(len + 1);
 
+    //printf("len%d\n beg%d\n end%d\n", len, beg, end);
+
     for (int i = 0; i < len;)
         res[i++] = line[beg++];
 
@@ -51,9 +53,10 @@ static char *len_par(char *line, int *len) {
             if (line[i] && line[i] == '}') {
                 (*len) -= i - beg - 3;
                 param = open_braces(line, beg, i);
-                if (param && getenv(param)) {
+                if (param && getenv(param))
                     (*len) += mx_strlen(getenv(param));
-                }
+                else 
+                    return NULL;
             }
         }
      }
@@ -77,7 +80,6 @@ static void ex_join(char *line, char *old_str, char **new_str) {
             (*new_str)[i++] = line[y];
         }
     }
-    //mx_printstr((*new_str));
 }
 
 char *mx_ex_param(char *line) {

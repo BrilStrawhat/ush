@@ -26,8 +26,8 @@ void mx_loop(t_head *head) {
 
         // line = valid ${}
             line = mx_ex_param(line);
-            //mx_printstr(line);
-            //mx_printchar('\n');
+            mx_printstr(line);
+            mx_printchar('\n');
  
             if (!line) {
                 mx_printerr("error param {}\n");// after error
@@ -43,6 +43,7 @@ void mx_loop(t_head *head) {
                 mx_launch_cmd(head, shell);
                 continue;
             }*/
+
         }
     }
 }
