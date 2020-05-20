@@ -15,10 +15,8 @@ char *mx_strtrim(const char *str) {
         if (str[i + 1] == '\0')
             return NULL;
     }
-    result = mx_strnew(end - begin);
-    result = mx_strncpy(result, str + begin, end - begin -1);
-    mx_printstr(result); mx_printstr("\n");
-    mx_printstr(str + begin);
+    result = mx_strnew((end - begin) + 1);
+    result = mx_strncpy(result, str + begin, (end - begin));
     return result;
 }
 /*
