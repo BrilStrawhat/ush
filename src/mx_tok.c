@@ -7,7 +7,7 @@ char *mx_trim_token(char *str) {
 	if (!str)
 		return NULL;
 	len = mx_strlen(str);
-	while(mx_isspace(str[len-1]) && len > 0) {
+	while(len > 0 && mx_isspace(str[len-1])) {
         if (len > 1 && str[len-2] == '\\')
             break;
         len--;
@@ -16,7 +16,7 @@ char *mx_trim_token(char *str) {
 		str++;
 		len--;
 	}
-	dst = mx_strnew(len);
+	dst = mx_strnew(len + 1);
 	mx_strncpy(dst, str, len);
 	return dst;
 }
@@ -33,23 +33,26 @@ static int tokensize(char *line, char ***toks, int bufsize, int position) {
 
     if (line_cp[0] == ';')
         return -1;
+        
     check = mx_check_quotes(&line_cp[check], ';');
     while (check > 0 && check != 100) {
         token = mx_strndup(line_cp, check);
-        line_cp = mx_strdup(line_cp + check + 1);
-        if (check > 0)
+        line_cp = mx_strdup(line_cp + check + 1); 
+        if (check > 0) {
             (*toks)[position++] = mx_trim_token(token);
+        }
         if (position >= bufsize)
             auditor(&bufsize, &toks);
         check = mx_check_quotes(line_cp, ';');
     }
-    if (check == -1)
+    if (check == -1) {
         return -1;
-    else if (check == 100)
-        (*toks)[position] = mx_strdup(mx_trim_token(line_cp));
+    }
+    else if (check == 100) {
+        (*toks)[position] = mx_strdup(mx_trim_token(line_cp));///  char *mx_trim_token(char *str) was this function
+    }
     return 0;
 }
-
 char **mx_tok(char *line) {
     int bufsize = 64;
     int position = 0;
@@ -67,11 +70,5 @@ char **mx_tok(char *line) {
     }
     if (tok[0] == NULL)
         return NULL;
-      /* mx_printstr("Here\n");
-        for (int i = 0; tok[i]; i++) {
-            mx_printstr(tok[i]);
-            mx_printstr("\n");
-        }
-       */ 
     return tok;
 }

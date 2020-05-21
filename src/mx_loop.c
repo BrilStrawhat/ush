@@ -26,19 +26,18 @@ void mx_loop(t_head *head) {
 
         // line = valid ${}
             line = mx_ex_param(line);
-            mx_printstr(line);
-            mx_printchar('\n');
- 
             if (!line) {
                 mx_printerr("error param {}\n");// after error
                 continue;
             }
-               /*
+            
            //mx_tilda(&line);
            //mx_printstr(line);
+        
             head = mx_create_head(line);
             
             //mx_printforest(head);
+            /*
             if (line != NULL) {
                 mx_launch_cmd(head, shell);
                 continue;
