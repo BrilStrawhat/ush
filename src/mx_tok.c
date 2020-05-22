@@ -49,7 +49,8 @@ static int tokensize(char *line, char ***toks, int bufsize, int position) {
         return -1;
     }
     else if (check == 100) {
-        (*toks)[position] = mx_strdup(mx_trim_token(line_cp));///  char *mx_trim_token(char *str) was this function
+        (*toks)[position++] = mx_strdup(mx_trim_token(line_cp));
+        (*toks)[position] = NULL;
     }
     return 0;
 }

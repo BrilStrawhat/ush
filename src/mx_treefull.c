@@ -66,6 +66,8 @@ t_cmd *mx_create_cmd(char *cmd, int i) {
 static void fillor(char *tok, t_cmd **err) {
     int j = 0;
 
+    //if (!tok) 
+    //    return;
     for (j = 0; tok[j]; j++) {
         if (tok[j] == '|' && tok[j + 1] == '|') {
             if ((*err)->cmd == NULL)

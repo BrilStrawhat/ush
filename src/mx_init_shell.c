@@ -1,5 +1,5 @@
 #include "ush.h"
-
+/*
 static char *get_pwd(void) {
     char *cur_dir = getcwd(NULL, 1024);
     char *pwd = getenv("PWD");
@@ -57,7 +57,7 @@ static t_variables *get_export(void) {
     }
     return variables;
 }
-
+*/
 static void init_shlvl(t_shell *shell) {
     char *shlvl = getenv("SHLVL");
     char *result = NULL;
@@ -85,11 +85,12 @@ static char **mx_init_builtin() {
 }
 
 void mx_init_shell(t_shell *shell) {
-    shell->pwd = get_pwd();
-    shell->variables = get_variables();
-    shell->export_variables = get_export();
+   // shell->pwd = get_pwd();
+    //shell->variables = get_variables();
+    //shell->export_variables = get_export();
     init_shlvl(shell);
     shell->builtins = mx_init_builtin();
+
     //printf("SHLVL %s\n", getenv("SHLVL"));
     //printf("PWD- %s\n", shell->pwd);
 }

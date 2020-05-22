@@ -10,9 +10,10 @@ static char *read_line(void) {
 void mx_loop(t_head *head) {
     char *line = NULL;
     int status = 0;
-    //t_shell *shell = (t_shell *)malloc(sizeof(t_shell));
+    t_shell *shell = (t_shell *)malloc(sizeof(t_shell));
+    bzero(shell, sizeof(t_shell));
 
-    // mx_init_shell(shell);
+    mx_init_shell(shell);
     while (1) {
         mx_printstr("u$h> ");
         line = read_line(); 
@@ -37,11 +38,11 @@ void mx_loop(t_head *head) {
             head = mx_create_head(line);
             
             //mx_printforest(head);
-            /*
+            
             if (line != NULL) {
                 mx_launch_cmd(head, shell);
                 continue;
-            }*/
+            }
 
         }
     }
