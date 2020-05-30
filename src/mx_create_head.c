@@ -33,8 +33,9 @@ t_head *mx_create_head(char *line) {
                 forest->command = mx_treefull(tok[i]);
                 forest->next = NULL;
             }
-            else
+            else {
                 mx_pushtree(&forest, tok[i]);
+            }
         }
     }
     //mx_printforest(forest);

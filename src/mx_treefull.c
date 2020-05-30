@@ -5,13 +5,17 @@ static char **create_artree(char *tok) {
     int count = 1;
 
     for (; tok[i]; i++) {
-        if (tok[i] == '\\' && tok[i+1] != '\'')
-            i += 2;
+        if (tok[i] == '\\' && tok[i+1] == '\'') {
+            i += 1;
+            continue;
+        }
         if (tok[i] == '\'') 
             if (mx_cycle_for_quotes(tok, '\'', &i))
                 continue;
-        if (tok[i] == '\\' && tok[i+1] != '"')
-            i += 2;
+        if (tok[i] == '\\' && tok[i+1] == '"') {
+            i += 1;
+            continue;
+        }
         if (tok[i] == '"')
             if (mx_cycle_for_quotes(tok, '"', &i))
                 continue;
@@ -66,6 +70,8 @@ t_cmd *mx_create_cmd(char *cmd, int i) {
 static void fillor(char *tok, t_cmd **err) {
     int j = 0;
 
+    //if (!tok) 
+    //    return;
     for (j = 0; tok[j]; j++) {
         if (tok[j] == '|' && tok[j + 1] == '|') {
             if ((*err)->cmd == NULL)
