@@ -33,8 +33,9 @@ static int tokensize(char *line, char ***toks, int bufsize, int position) {
 
     if (line_cp[0] == ';')
         return -1;
-        
+
     check = mx_check_quotes(&line_cp[check], ';');
+    //mx_printstr("BBBBBBBBBBBBBBBBB\n\n\n");
     while (check > 0 && check != 100) {
         token = mx_strndup(line_cp, check);
         line_cp = mx_strdup(line_cp + check + 1); 

@@ -24,14 +24,13 @@ void mx_loop(t_head *head) {
                 status = 258;// errno
                 continue;
             }
-
         // line = valid ${}
             line = mx_ex_param(line);
             if (!line) {
                 mx_printerr("error param {}\n");// after error
                 continue;
             }
-            
+        
            //mx_tilda(&line);
            //mx_printstr(line);
         

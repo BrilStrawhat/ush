@@ -23,13 +23,17 @@ char **mx_fill_str(char *tok, int count) {
     int i = 0;
 
     for (; tok[i]; i++) {
-        if (tok[i] == '\\' && tok[i+1] != '\'')
-            i += 2;
+        if (tok[i] == '\\' && tok[i+1] == '\'') {
+            i += 1;
+            continue;
+        }
         if (tok[i] == '\'') 
             if (mx_cycle_for_quotes(tok, '\'', &i))
                 continue;
-        if (tok[i] == '\\' && tok[i+1] != '"')
-            i += 2;
+        if (tok[i] == '\\' && tok[i+1] == '"') {
+            i += 1;
+            continue;
+        }
         if (tok[i] == '"')
             if (mx_cycle_for_quotes(tok, '"', &i))
                 continue;

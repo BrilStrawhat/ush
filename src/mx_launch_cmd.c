@@ -7,7 +7,7 @@ static void mx_launch_menu(char *cmd, t_shell *shell) {
             mx_start(l_inf, shell);
         }
         else
-        shell->status = 127; // echo $?;
+            shell->status = 127; // echo $?;
 }
 
 void mx_launch_cmd(t_head *forest, t_shell *shell) {
