@@ -28,11 +28,9 @@ static void tokensize(char *line, char ***toks, int bufsize, int position) {
         return;
     else if (check == 100)
         (*toks)[position] = mx_strdup(mx_trim_token(line_cp));
-    else if ((*toks)) {
+    else if ((*toks))
         mx_strdel(&line); mx_strdel(&line_cp);
-    }      
-
-    
+    (*toks)[position + 1] = NULL;
 }
 
 st_launch *mx_launch_init(char *cmd, t_shell *shell) {
@@ -46,7 +44,6 @@ st_launch *mx_launch_init(char *cmd, t_shell *shell) {
     l_inf->par = NULL;
     l_inf->type = -1;
     char **command = NULL;
-    
     command = malloc(64 * sizeof(char *));
 // exp params
     cmd = mx_ex_param(cmd); // &
