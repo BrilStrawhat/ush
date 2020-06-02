@@ -38,7 +38,7 @@ st_launch *mx_launch_init(char *cmd, t_shell *shell) {
 
     }
     //int index = -1;
-    st_launch *l_inf = malloc(sizeof(st_launch));
+    st_launch *l_inf = malloc(sizeof(st_launch)); // в отдельную функцию 
     l_inf->filepath = NULL;
     l_inf->cmd_arr = NULL;
     l_inf->par = NULL;

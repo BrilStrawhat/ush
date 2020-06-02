@@ -1,12 +1,10 @@
 #include "ush.h"
 
 static void fill_str(char **tok, int *i, char ***tmp, int *j) {
-    ///if ((*tok)[*i]) {
     (*tmp[(*j)]) = mx_strndup((*tok), (*i));
     (*tok) += (*i) + 2;
     (*i) = 0;
     (*j) += 1;
-    ///}
 }
 
 static char **get_null(char **tok, char **tmp, int j, int i) {
