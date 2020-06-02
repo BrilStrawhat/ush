@@ -25,12 +25,12 @@ void mx_loop(t_head *head) {
                 continue;
             }
         // line = valid ${}
-            line = mx_ex_param(line);
+            /*line = mx_ex_param(line);
             if (!line) {
                 mx_printerr("error param {}\n");// after error
                 continue;
             }
-        
+        */
            //mx_tilda(&line);
            //mx_printstr(line);
         
