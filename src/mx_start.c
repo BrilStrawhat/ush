@@ -8,9 +8,3 @@ void mx_start_builtin(st_launch *l_inf, t_shell *shell) {
         }
     }
 }
-
-
-void mx_start(st_launch *l_inf, t_shell *shell) { 
-    if (l_inf->type == 1)
-        mx_start_builtin(l_inf, shell);
-}
