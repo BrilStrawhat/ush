@@ -56,15 +56,8 @@ st_launch *mx_launch_init(char *cmd, t_shell *shell) {
     l_inf->cmd_arr = command;
 //find cmd
     if (l_inf->cmd_arr) {
-        if ((l_inf->type = mx_check_builtin(l_inf->cmd_arr, shell)) == 1) // 1 = builtin
-            return l_inf;
-        else if ((l_inf->type = mx_find_filepath(l_inf->cmd_arr, &l_inf->filepath)) == 2)
-            return l_inf;
-        else {
-            mx_printerr("ush: command ");
-            mx_printerr(l_inf->cmd_arr[0]);
-            mx_printerr(" not found\n");
-        }
+        l_inf->type = mx_check_builtin(l_inf->cmd_arr, shell); // 1 = builtin
+        return l_inf;
     }
     return NULL;
 }

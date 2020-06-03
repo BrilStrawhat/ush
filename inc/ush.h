@@ -10,6 +10,7 @@
 #include <regex.h>
 #include <math.h>
 #include <dirent.h>
+#include <sys/errno.h>
 
 #define BUFSIZE 1024
 
@@ -24,7 +25,7 @@ typedef struct s_shell {
     t_variables *export_variables;
     char *pwd;
     int status;
-    char** builtins;
+    char **builtins;
 }               t_shell;
 
 typedef struct s_cmd {
@@ -77,6 +78,7 @@ void mx_start_builtin(st_launch *l_inf, t_shell *shell);
 void mx_init_shell(t_shell *shell);
 void mx_push_variable(t_variables **list, void *name, void *value);
 
-
+// fork and exec
+int mx_exec_prog(st_launch *l_inf);
 
 #endif
