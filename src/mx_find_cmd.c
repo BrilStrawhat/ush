@@ -1,10 +1,12 @@
 #include "ush.h"
 
-int mx_check_builtin(char **cmd_arr, t_shell *shell) {
+int mx_check_builtin(st_launch *l_inf, t_shell *shell) {
     for(int i = 0; shell->builtins[i]; i++)
-        if (strcmp(shell->builtins[i], cmd_arr[0]) == 0)
-            return 1; // add exec builtin
-    return 0;
+        if (strcmp(shell->builtins[i], l_inf->cmd_arr[0]) == 0) {
+            mx_start_builtin(l_inf, shell);
+            return 1;
+        }
+    return mx_exec_prog(l_inf);
 }
 
 int mx_find_filepath(char **cmd_arr, char **filepath) { // rewrite to builtin 'which'
