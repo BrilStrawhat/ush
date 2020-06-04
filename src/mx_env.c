@@ -11,16 +11,10 @@ static void print_env(t_shell *shell) {
     }
 }
 
-static void null_env(t_shell *shell) {
-    for (int i = 0; shell->env[i]; i++) {
-        shell->env[i] = NULL;
-    }
-}
+static int reparse(st_launch *l_inf, t_shell *shell, int n) {
+    int i = n; 
 
-static int flag_i(st_launch *l_inf, t_shell *shell) {
-    int i = 2; 
-
-    if (!l_inf->cmd_arr[2])
+    if (!l_inf->cmd_arr[i])
         return 1;
     while (l_inf->cmd_arr[i]) {
         l_inf->cmd_arr[i - 2] = l_inf->cmd_arr[i];
@@ -29,9 +23,6 @@ static int flag_i(st_launch *l_inf, t_shell *shell) {
     while (l_inf->cmd_arr[i - 2]) {
         l_inf->cmd_arr[i - 2] = NULL;
         i++;
-    } 
-    for(int i = 0; shell->env[i]; i++) {
-        shell->env[i] = NULL;
     }
     mx_check_builtin(l_inf, shell);
     return 0;
@@ -50,18 +41,49 @@ static void flag_u(st_launch *l_inf, t_shell *shell, char *arg) {
     }
 }
 
+static int flag_P(st_launch *l_inf, t_shell *shell) {
+    if (l_inf->cmd_arr[2]) {
+        l_inf->filepath = l_inf->cmd_arr[2];
+        // mx_printstr(l_inf->filepath);
+        // mx_printchar('\n');
+        return 2;
+    }
+    else
+       mx_printstr("usage: env [-P utilpath]\n"); 
+    return -1;
+}
+
+static int parse_flags(st_launch *l_inf, t_shell *shell, char *arg) {
+    if (l_inf->cmd_arr[1][0] != '-')
+        return 1;
+    if (strcmp(l_inf->cmd_arr[1], "--") == 0) {
+        return 2;
+    }
+    if (mx_get_char_index(l_inf->cmd_arr[1], 'u') != -1) {
+        flag_u(l_inf, shell, l_inf->cmd_arr[2]);
+    }
+    else if (mx_get_char_index(l_inf->cmd_arr[1], 'i') != -1) {
+        shell->env = NULL;
+        return 2;
+    }
+    else if (mx_get_char_index(l_inf->cmd_arr[1], 'P') != -1) {
+        return flag_P(l_inf, shell);
+    }
+    return -1;
+}
+
 int mx_env(st_launch *l_inf, t_shell *shell) {
     extern char **environ;
+    int n = 0;
 
     if (!l_inf->cmd_arr[1])
         print_env(shell);
-    else if (strcmp(l_inf->cmd_arr[1], "-u") == 0)
-        flag_u(l_inf, shell, l_inf->cmd_arr[2]);
-    else if (strcmp(l_inf->cmd_arr[1], "-i") == 0) {
-        shell->env = NULL;
-        flag_i(l_inf, shell);
+    else {
+        n = parse_flags(l_inf, shell, l_inf->cmd_arr[2]);
+        if (n > 0 && l_inf->cmd_arr[1])
+            reparse(l_inf, shell, n);
     }
-    // else if (strcmp(l_inf->cmd_arr[1], "-i") == 0)
-    // shell->env = environ;
+    shell->env = environ;
+    mx_printstr(l_inf->filepath);
     return 0;
 }
