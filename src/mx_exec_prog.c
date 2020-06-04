@@ -1,6 +1,6 @@
 #include "ush.h"
 
-// extern char **environ;
+extern char **environ;
 
 static void print_error(st_launch *l_inf) {
     if (errno == ENOENT) {
@@ -15,16 +15,17 @@ static void print_error(st_launch *l_inf) {
     }
 }
 
-int mx_exec_prog(st_launch *l_inf) {
+int mx_exec_prog(st_launch *l_inf, t_shell *shell) { // Not auditor((
     int status = 0;
     pid_t pid;
+    char *fp = (l_inf->filepath != NULL) ? l_inf->filepath :l_inf->cmd_arr[0];
 
     if ((pid = fork()) < 0) {
         print_error(l_inf);
         return -1;
     }
     else if (pid == 0) { // Child process
-        if (execvp(l_inf->cmd_arr[0], l_inf->cmd_arr) == -1) { // need to change to execve
+        if (execve(fp, l_inf->cmd_arr, environ) == -1) { 
             print_error(l_inf);
             return -1;
         }

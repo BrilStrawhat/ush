@@ -69,7 +69,7 @@ void mx_launch_cmd(t_head *forest, t_shell *shell);
 st_launch *mx_launch_init(char *cmd, t_shell *shell);
 
 //builtins
-int mx_check_builtin(char **cmd_arr, t_shell *shell);
+int mx_check_builtin(st_launch *l_inf, t_shell *shell);
 int mx_find_filepath(char **cmd_arr, char **filepath);
 void mx_start(st_launch *l_inf, t_shell *shell); // builtins and path
 void mx_start_builtin(st_launch *l_inf, t_shell *shell);
@@ -79,6 +79,6 @@ void mx_init_shell(t_shell *shell);
 void mx_push_variable(t_variables **list, void *name, void *value);
 
 // fork and exec
-int mx_exec_prog(st_launch *l_inf);
+int mx_exec_prog(st_launch *l_inf, t_shell *shell);
 
 #endif
