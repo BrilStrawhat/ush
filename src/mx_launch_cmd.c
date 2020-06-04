@@ -1,16 +1,16 @@
 #include "ush.h"
 
-// static void mx_launch_menu(char *cmd, t_shell *shell) {
-    // st_launch *l_inf = mx_launch_init(cmd, shell); // create cmd_arr // create param_arr // find type // find filepath // exp param
-    // if (l_inf) {
-        // if (l_inf->type == 1)
-            // mx_start_builtin(l_inf, shell);
-        // else if (l_inf->type == 2)
-            // mx_exec_prog(l_inf);
-        // }
-        // else
-            // shell->status = 127; // echo $?;
-// }
+static void mx_launch_menu(char *cmd, t_shell *shell) {
+     st_launch *l_inf = mx_launch_init(cmd, shell); // create cmd_arr // create param_arr // find type // find filepath // exp param
+     if (l_inf) {
+         if (l_inf->type == 1)
+             mx_start_builtin(l_inf, shell);
+         else if (l_inf->type == 2)
+            mx_exec_prog(l_inf, shell);
+         }
+         else
+             shell->status = 127; // echo $?;
+}
 
 void mx_launch_cmd(t_head *forest, t_shell *shell) {
     while(forest) {
