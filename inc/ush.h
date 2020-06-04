@@ -74,6 +74,8 @@ int mx_check_builtin(st_launch *l_inf, t_shell *shell);
 int mx_find_filepath(char **cmd_arr, char **filepath);
 void mx_start(st_launch *l_inf, t_shell *shell); // builtins and path
 void mx_start_builtin(st_launch *l_inf, t_shell *shell);
+
+// env
 int mx_env(st_launch *l_inf, t_shell *shell);
 
 // init t_shell info
