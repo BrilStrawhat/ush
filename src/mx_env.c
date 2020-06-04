@@ -42,7 +42,7 @@ static void flag_u(st_launch *l_inf, t_shell *shell, char *arg) {
 }
 
 static int flag_P(st_launch *l_inf, t_shell *shell) {
-    if (l_inf->cmd_arr[2]) {
+    if (l_inf->cmd_arr[2] && l_inf->cmd_arr[3]) {
         l_inf->filepath = l_inf->cmd_arr[2];
         // mx_printstr(l_inf->filepath);
         // mx_printchar('\n');
