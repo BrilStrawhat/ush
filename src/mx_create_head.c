@@ -25,7 +25,6 @@ t_head *mx_create_head(char *line) {
     t_head *forest = NULL;
 
     tok = mx_tok(line); // разбиваем строчку на ;
-
     if (tok) {
         for (int i = 0; tok[i]; i++) {
             if (forest == NULL) {

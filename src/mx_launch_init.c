@@ -56,8 +56,10 @@ st_launch *mx_launch_init(char *cmd, t_shell *shell) {
     l_inf->cmd_arr = command;
 //find cmd
     if (l_inf->cmd_arr) {
+
         l_inf->type = mx_check_builtin(l_inf->cmd_arr, shell); // 1 = builtin
         return l_inf;
+
     }
     return NULL;
 }
