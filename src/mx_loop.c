@@ -37,7 +37,9 @@ void mx_loop(t_head *head) {
             head = mx_create_head(line);
             
             //mx_printforest(head);
-            
+            if (!head) { // new
+                continue;
+            }
             if (line != NULL) {
                 mx_launch_cmd(head, shell);
                 continue;

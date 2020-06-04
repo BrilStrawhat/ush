@@ -39,8 +39,10 @@ char **mx_fill_str(char *tok, int count) {
                 continue;
         if (tok[i] == '\\' && tok[i + 1] == '&')
             continue;
-        if (tok[i] == '&' && tok[i + 1] == '&')
+        if (tok[i] == '&' && tok[i + 1] == '&') {
             fill_str(&tok, &i, &tmp, &j);
+            i--;// new i += 2 in fill_str ===> new circle i++;
+        }
     }
     return get_null(&tok, tmp, j, i);
 }
