@@ -16,7 +16,9 @@ void mx_loop(t_head *head) {
     mx_init_shell(shell);
     while (1) {
         mx_printstr("u$h> ");
-        line = read_line(); 
+        line = read_line();
+        if (!mx_strtrim(line))// new
+            continue;// new
         line[strlen(line)-1] = '\0';
         if (line) {
             if (mx_check_line(line) == 1) {
