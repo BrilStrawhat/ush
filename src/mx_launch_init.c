@@ -42,7 +42,6 @@ st_launch *mx_launch_init(char *cmd, t_shell *shell) {
     l_inf->filepath = NULL;
     l_inf->cmd_arr = NULL;
     l_inf->par = NULL;
-    l_inf->type = -1;
     char **command = NULL;
     command = malloc(64 * sizeof(char *));
 // exp params
@@ -56,8 +55,9 @@ st_launch *mx_launch_init(char *cmd, t_shell *shell) {
     l_inf->cmd_arr = command;
 //find cmd
     if (l_inf->cmd_arr) {
-        l_inf->type = mx_check_builtin(l_inf->cmd_arr, shell); // 1 = builtin
-        return l_inf;
+        if (mx_check_builtin(l_inf->cmd_arr, shell) == 0) // 1 = builtin
+            return l_inf;
     }
+    // add free alocated memmory because builtin already executed.
     return NULL;
 }

@@ -3,8 +3,8 @@
 int mx_check_builtin(char **cmd_arr, t_shell *shell) {
     for(int i = 0; shell->builtins[i]; i++)
         if (strcmp(shell->builtins[i], cmd_arr[0]) == 0)
-            return 1;
-    return 2;
+            return 1; // add exec builtin
+    return 0;
 }
 
 int mx_find_filepath(char **cmd_arr, char **filepath) { // rewrite to builtin 'which'
@@ -21,10 +21,10 @@ int mx_find_filepath(char **cmd_arr, char **filepath) { // rewrite to builtin 'w
                 if (strcmp(ds->d_name, cmd_arr[0]) == 0) {
                     *filepath = mx_strjoin(token, "/");
                     *filepath = mx_strjoin(*filepath, ds->d_name); // need free in mx_strjoin;
-                    return 2; // 2 means == type = binary;
+                    return 0; // 2 means == type = binary;
                 }
             }
-        closedir(dptr);
+            closedir(dptr);
         }
     }
     return -1;
