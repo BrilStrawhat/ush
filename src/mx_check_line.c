@@ -10,11 +10,13 @@ static int valid_operator(char *line, int i) {
         return 1;
     for (int j = i; line[j] && line[j] == '&'; j++) {
         b++;
-    if (b && t != 2)
+    if (b && b != 2)// new
         return 1;
     }
     if ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|'))
         return 1;
+    //if (line[i] == '&')
+    //   return 1;
     return 0;
 }
 

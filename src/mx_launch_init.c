@@ -57,9 +57,9 @@ st_launch *mx_launch_init(char *cmd, t_shell *shell) {
 //find cmd
     if (l_inf->cmd_arr) {
         if ((l_inf->type = mx_check_builtin(l_inf->cmd_arr, shell)) == 1) // 1 = builtin
-            return l_inf;
+            return l_inf;// start builtin
         else if ((l_inf->type = mx_find_filepath(l_inf->cmd_arr, &l_inf->filepath)) == 2)
-            return l_inf;
+            return l_inf;// return str// with path
         else {
             mx_printerr("ush: command ");
             mx_printerr(l_inf->cmd_arr[0]);

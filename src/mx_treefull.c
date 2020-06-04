@@ -21,7 +21,7 @@ static char **create_artree(char *tok) {
                 continue;
         if (tok[i] == '\\' && tok[i + 1] == '&')
             continue;
-        if (tok[i] == '&' && tok[i + 1] == '&') 
+        if (tok[i] == '&' && tok[i + 1] == '&')
             count += 1;
     }
     return mx_fill_str(tok, count);
@@ -105,9 +105,7 @@ t_cmd *mx_treefull(char *tok) {
             leaf->and = mx_create_cmd(NULL, 0);
             leaf = leaf->and;
         }
-        //mx_printstr(leaf[0].cmd);
     }
-    //mx_printstr(root->cmd);
     return root;
 }
 
