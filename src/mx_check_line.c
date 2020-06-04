@@ -11,9 +11,9 @@ static int valid_operator(char *line, int i) {
         return 1;
     for (int j = i; line[j] && line[j] == '&'; j++)
         b++;
-    if (b && b != 2)// new
+    if (b && b != 2)
         return 1;
-    if ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|'))
+    if ((line[i] == '&' && line[i + 1] == '&') || (line[i] == '|' && line[i + 1] == '|')) //new
         return 1;
     return 0;
 }
