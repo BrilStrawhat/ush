@@ -87,7 +87,7 @@ void mx_init_shell(t_shell *shell);
 void mx_push_variable(t_variables **list, void *name, void *value);
 
 // fork and exec
-int mx_exec_prog(st_launch *l_inf, t_shell *shell);
+int mx_exec_prog(st_launch *l_inf);
 
 // echo
 int mx_echo(char **argv, t_shell *shell);
