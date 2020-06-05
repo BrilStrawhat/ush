@@ -19,11 +19,11 @@ static int reparse(st_launch *l_inf, t_shell *shell, int n) {
     for (int j = 0; j < i; j++)
         free(l_inf->cmd_arr[j]);
     while (l_inf->cmd_arr[i]) {
-        l_inf->cmd_arr[i - 2] = l_inf->cmd_arr[i];
+        l_inf->cmd_arr[i - n] = l_inf->cmd_arr[i];
         i++;
     }
-    while (l_inf->cmd_arr[i - 2]) {
-        l_inf->cmd_arr[i - 2] = NULL;
+    while (l_inf->cmd_arr[i - n]) {
+        l_inf->cmd_arr[i - n] = NULL;
         i++;
     }
     mx_check_builtin(l_inf, shell);
@@ -44,18 +44,16 @@ static void flag_u(st_launch *l_inf, t_shell *shell, char *arg) {
 }
 
 static int flag_P(st_launch *l_inf) {
-    char *new_path = getenv("PATH");
     if (l_inf->cmd_arr[2] && l_inf->cmd_arr[3]) {
-        setenv("PWD", l_inf->cmd_arr[2], 0);
-        // l_inf->filepath = l_inf->cmd_arr[2];
+        setenv("PATH", l_inf->cmd_arr[2], 1);
         return 3;
     }
     else
-       mx_printstr("usage: env [-P utilpath]\n"); 
+       mx_printstr("usage: env [-P utilpath] [command]\n"); 
     return -1;
 }
 
-static int parse_flags(st_launch *l_inf, t_shell *shell, char *arg) {
+static int parse_flags(st_launch *l_inf, t_shell *shell) {
     if (l_inf->cmd_arr[1][0] != '-')
         return 1;
     if (strcmp(l_inf->cmd_arr[1], "--") == 0) {
@@ -74,18 +72,27 @@ static int parse_flags(st_launch *l_inf, t_shell *shell, char *arg) {
     return -1;
 }
 
+
+
 int mx_env(st_launch *l_inf, t_shell *shell) {
     char **new_env = environ;
+    char *new_path = NULL;
+    mx_printstr(new_path);
     int n = 0;
 
+    if (environ)
+        new_path = strdup(getenv("PATH"));
     if (!l_inf->cmd_arr[1])
         print_env();
     else {
-        n = parse_flags(l_inf, shell, l_inf->cmd_arr[2]);
+        n = parse_flags(l_inf, shell);
         if (n > 0 && l_inf->cmd_arr[1])
             reparse(l_inf, shell, n);
     }
     environ = new_env;
-    mx_printstr(l_inf->filepath);
+    if (environ)
+        setenv("PATH", new_path, 1);
+    if (new_path)
+        free(new_path);
     return 0;
 }
