@@ -1,5 +1,17 @@
 #include "ush.h"
 
+char *mx_three_to_one(char *first_part, char *text, char *second_part) {
+    int len1 = mx_strlen(first_part);
+    int len2 = mx_strlen(text);
+    int len3 = mx_strlen(second_part);
+    char *result = mx_strnew(len1 + len2 + len3);
+
+    mx_strcat(result, first_part);
+    mx_strcat(result, text);
+    mx_strcat(result, second_part);
+    return result;
+}
+
 int mx_check_builtin(st_launch *l_inf, t_shell *shell) {
     for(int i = 0; shell->builtins[i]; i++)
         if (strcmp(shell->builtins[i], l_inf->cmd_arr[0]) == 0) {
@@ -21,27 +33,23 @@ int mx_check_builtin(st_launch *l_inf, t_shell *shell) {
 }
 
 int mx_find_filepath(char **cmd_arr, char **filepath) { // rewrite to builtin 'which'
-    char *path = mx_strdup(getenv("PATH"));
-    char *token = NULL;
+    char *path = getenv("PATH");
     DIR *dptr;
     struct dirent *ds;
     char *temp;
 
-    if (path)
-        token = strtok(path, ":"); // need to free token??
-    for (; token; token = strtok(NULL, ":")) {
-        if ((dptr = opendir(token)) != NULL) {
-            for (; (ds = readdir(dptr)) != NULL;) {
-                if (strcmp(ds->d_name, cmd_arr[0]) == 0) {
-                    temp = mx_strjoin(token, "/");
-                    *filepath = mx_strjoin(temp, ds->d_name); // need free in mx_strjoin;
-                    mx_strdel(&path);
-                    mx_strdel(&temp);
-                    closedir(dptr);
-                    return 0; // Find file located in PATH
+    if (path != NULL) {
+        for (char *tok = strtok(path, ":"); tok; tok = strtok(NULL, ":")) { // need to free tok??
+            if ((dptr = opendir(tok)) != NULL) {
+                for (; (ds = readdir(dptr)) != NULL;) {
+                    if (strcmp(ds->d_name, cmd_arr[0]) == 0) {
+                        *filepath = mx_three_to_one(tok, "/", ds->d_name);
+                        closedir(dptr);
+                        return 0; // Finded file located in PATH
+                    }
                 }
+                closedir(dptr);
             }
-            closedir(dptr);
         }
     }
     return -1;

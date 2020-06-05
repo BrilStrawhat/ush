@@ -16,6 +16,8 @@ extern char **environ;
 
 #define BUFSIZE 1024
 
+extern char **environ;
+
 typedef struct s_variables {
     char *name;
     char *value;
@@ -42,7 +44,7 @@ typedef struct s_head {
     struct s_head *next;
 }               t_head;
 
-typedef struct launch {
+typedef struct s_launch {
     char *filepath; //path to binary;
     char **cmd_arr; // env -ppp
     char **par; // a=b b=c ..
