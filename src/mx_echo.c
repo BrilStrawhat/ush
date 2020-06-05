@@ -120,6 +120,8 @@ int mx_echo(char **argv, t_shell *shell) { // to many functions in file
     int argc = 0;
 
     for (; argv[argc] != NULL; argc++);
+    if (argc < 2)
+        return 0;
     flag_parser(argc, argv, flags, &i);
     if (flags[2] == true ||
        (flags[0] == false && flags[1] == false && flags[2] == false))
