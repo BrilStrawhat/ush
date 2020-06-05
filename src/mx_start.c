@@ -6,6 +6,8 @@ void mx_start_builtin(st_launch *l_inf, t_shell *shell) {
            // shell->status = your_function(l_inf->cmd_arr, shell); // your function where you work with builtins/   you need return shell->statur = 0; if Ok!
            if (strcmp("env", shell->builtins[i]) == 0)
                 mx_env(l_inf, shell);
+           if (strcmp("echo", shell->builtins[i]) == 0)
+                mx_echo(l_inf->cmd_arr, shell);
            mx_printstr("Builtins\n");
         }
     }

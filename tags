@@ -190,3 +190,7 @@ type	./inc/ush.h	/^    int type; \/\/ no cmd found , builtin, binary      (alias
 valid_operator	./src/mx_check_line.c	/^static int valid_operator(char *line, int i) {$/;"	f	file:
 value	./inc/ush.h	/^    char *value;$/;"	m	struct:s_variables
 variables	./inc/ush.h	/^    t_variables *variables;$/;"	m	struct:s_shell
+flag_parser	mx_echo.c	/^static void flag_parser(int argc, char **argv, boo/
+is_backslash_char	mx_echo.c	/^static bool is_backslash_char(char c) {$/
+print_octal	mx_echo.c	/^static void print_octal(const char *str, int *j) {/
+replace_backslash_char	mx_echo.c	/^static void replace_backslash_char(char c) {$/
