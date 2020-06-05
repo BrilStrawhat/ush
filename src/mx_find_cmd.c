@@ -21,7 +21,7 @@ int mx_check_builtin(st_launch *l_inf, t_shell *shell) {
 }
 
 int mx_find_filepath(char **cmd_arr, char **filepath) { // rewrite to builtin 'which'
-    char *path = mx_strdup(getenv("PATH")); 
+    char *path = mx_strdup(getenv("PATH"));
     char *token = NULL;
     DIR *dptr;
     struct dirent *ds;

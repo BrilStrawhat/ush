@@ -85,6 +85,8 @@ static char **mx_init_builtin() {
 }
 
 void mx_init_shell(t_shell *shell) {
+    extern char **environ;
+    shell->env = environ;
     shell->pwd = get_pwd();
     shell->variables = get_variables();
     shell->export_variables = get_export();
