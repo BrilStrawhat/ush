@@ -22,14 +22,14 @@ int mx_check_builtin(st_launch *l_inf, t_shell *shell) {
     if (l_inf->filepath == NULL && l_inf->cmd_arr != NULL) {
         for (int i = 0; l_inf->cmd_arr[0][i]; i++) {
             if (l_inf->cmd_arr[0][i] == '/')
-                return mx_exec_prog(l_inf, shell);
+                return mx_exec_prog(l_inf);
         }
         mx_printerr("ush: command ");
         mx_printerr(l_inf->cmd_arr[0]);
         mx_printerr(" not found\n");
         return -1;
     }
-    return mx_exec_prog(l_inf, shell);
+    return mx_exec_prog(l_inf);
 }
 
 int mx_find_filepath(char **cmd_arr, char **filepath) { // rewrite to builtin 'which'
