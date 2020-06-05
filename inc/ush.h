@@ -12,6 +12,8 @@
 #include <dirent.h>
 #include <sys/errno.h>
 
+extern char **environ;
+
 #define BUFSIZE 1024
 
 typedef struct s_variables {
