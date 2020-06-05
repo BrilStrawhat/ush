@@ -1,7 +1,5 @@
 #include "ush.h"
 
-extern char **environ;
-
 static void print_error(st_launch *l_inf) {
     if (errno == ENOENT) {
         mx_printerr("ush: command ");
@@ -15,7 +13,7 @@ static void print_error(st_launch *l_inf) {
     }
 }
 
-int mx_exec_prog(st_launch *l_inf, t_shell *shell) { // Not auditor((
+int mx_exec_prog(st_launch *l_inf) { // Not auditor((
     int status = 0;
     pid_t pid;
     char *fp = (l_inf->filepath != NULL) ? l_inf->filepath :l_inf->cmd_arr[0];
