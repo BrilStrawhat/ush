@@ -44,10 +44,11 @@ static void flag_u(st_launch *l_inf, t_shell *shell, char *arg) {
 }
 
 static int flag_P(st_launch *l_inf) {
-    char *new_path;
+    char *new_path = getenv("PATH");
     if (l_inf->cmd_arr[2] && l_inf->cmd_arr[3]) {
-        l_inf->filepath = l_inf->cmd_arr[2];
-        return 2;
+        setenv("PWD", l_inf->cmd_arr[2], 0);
+        // l_inf->filepath = l_inf->cmd_arr[2];
+        return 3;
     }
     else
        mx_printstr("usage: env [-P utilpath]\n"); 
