@@ -16,6 +16,8 @@ static int reparse(st_launch *l_inf, t_shell *shell, int n) {
 
     if (!l_inf->cmd_arr[i])
         return 1;
+    for (int j = 0; j < i; j++)
+        free(l_inf->cmd_arr[j]);
     while (l_inf->cmd_arr[i]) {
         l_inf->cmd_arr[i - 2] = l_inf->cmd_arr[i];
         i++;
