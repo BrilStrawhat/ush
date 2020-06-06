@@ -18,7 +18,7 @@ int mx_check_builtin(st_launch *l_inf, t_shell *shell) {
             mx_start_builtin(l_inf, shell);
             return 1;
         }
-    mx_find_filepath(l_inf->cmd_arr, &l_inf->filepath);
+    mx_find_filepath(l_inf->cmd_arr, &l_inf->filepath, NULL);
     if (l_inf->filepath == NULL && l_inf->cmd_arr != NULL) {
         for (int i = 0; l_inf->cmd_arr[0][i]; i++) {
             if (l_inf->cmd_arr[0][i] == '/')
@@ -32,24 +32,24 @@ int mx_check_builtin(st_launch *l_inf, t_shell *shell) {
     return mx_exec_prog(l_inf);
 }
 
-int mx_find_filepath(char **cmd_arr, char **filepath) { // rewrite to builtin 'which'
-    char *path = getenv("PATH");
-    DIR *dptr;
-    struct dirent *ds;
+// int mx_find_filepath(char **cmd_arr, char **filepath) { // rewrite to builtin 'which'
+    // char *path = getenv("PATH");
+    // DIR *dptr;
+    // struct dirent *ds;
 
-    if (path != NULL) {
-        for (char *tok = strtok(path, ":"); tok; tok = strtok(NULL, ":")) { // need to free tok??
-            if ((dptr = opendir(tok)) != NULL) {
-                for (; (ds = readdir(dptr)) != NULL;) {
-                    if (strcmp(ds->d_name, cmd_arr[0]) == 0) {
-                        *filepath = mx_three_to_one(tok, "/", ds->d_name);
-                        closedir(dptr);
-                        return 0; // Finded file located in PATH
-                    }
-                }
-                closedir(dptr);
-            }
-        }
-    }
-    return -1;
-}
+    // if (path != NULL) {
+        // for (char *tok = strtok(path, ":"); tok; tok = strtok(NULL, ":")) { // need to free tok??
+            // if ((dptr = opendir(tok)) != NULL) {
+                // for (; (ds = readdir(dptr)) != NULL;) {
+                    // if (strcmp(ds->d_name, cmd_arr[0]) == 0) {
+                        // *filepath = mx_three_to_one(tok, "/", ds->d_name);
+                        // closedir(dptr);
+                        // return 0; // Finded file located in PATH
+                    // }
+                // }
+                // closedir(dptr);
+            // }
+        // }
+    // }
+    // return -1;
+// }
