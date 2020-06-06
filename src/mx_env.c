@@ -80,7 +80,7 @@ int mx_env(st_launch *l_inf, t_shell *shell) {
     mx_printstr(new_path);
     int n = 0;
 
-    if (environ)
+    if (getenv("PATH"))
         new_path = strdup(getenv("PATH"));
     if (!l_inf->cmd_arr[1])
         print_env();
