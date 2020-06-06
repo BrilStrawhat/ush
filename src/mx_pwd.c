@@ -13,11 +13,8 @@ static int parse_flags(st_launch *l_inf, char *rpath) {
         if (mx_get_char_index(l_inf->cmd_arr[1], 'L') != -1) {
             return 0;
         }
-
-        return 1;
     }
-    else 
-        mx_printerr("pwd: bad option\n");
+    mx_printerr("pwd: bad option\n");
 
     return 1;
 }
