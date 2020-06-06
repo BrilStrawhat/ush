@@ -36,7 +36,6 @@ int mx_find_filepath(char **cmd_arr, char **filepath) { // rewrite to builtin 'w
     char *path = getenv("PATH");
     DIR *dptr;
     struct dirent *ds;
-    char *temp;
 
     if (path != NULL) {
         for (char *tok = strtok(path, ":"); tok; tok = strtok(NULL, ":")) { // need to free tok??

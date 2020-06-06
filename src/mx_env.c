@@ -31,7 +31,7 @@ static int reparse(st_launch *l_inf, t_shell *shell, int n) {
 
 }
 
-static void flag_u(st_launch *l_inf, t_shell *shell, char *arg) {
+static void flag_u(char *arg) {
     if (!arg)
         mx_printstr("usage: env [-u name]\n");
     else
@@ -53,14 +53,14 @@ static int flag_P(st_launch *l_inf) {
     return -1;
 }
 
-static int parse_flags(st_launch *l_inf, t_shell *shell) {
+static int parse_flags(st_launch *l_inf) {
     if (l_inf->cmd_arr[1][0] != '-')
         return 1;
     if (strcmp(l_inf->cmd_arr[1], "--") == 0) {
         return 2;
     }
     if (mx_get_char_index(l_inf->cmd_arr[1], 'u') != -1) {
-        flag_u(l_inf, shell, l_inf->cmd_arr[2]);
+        flag_u(l_inf->cmd_arr[2]);
     }
     else if (mx_get_char_index(l_inf->cmd_arr[1], 'i') != -1) {
         environ = NULL;
@@ -77,20 +77,19 @@ static int parse_flags(st_launch *l_inf, t_shell *shell) {
 int mx_env(st_launch *l_inf, t_shell *shell) {
     char **new_env = environ;
     char *new_path = NULL;
-    mx_printstr(new_path);
     int n = 0;
 
     if (getenv("PATH"))
         new_path = strdup(getenv("PATH"));
-    if (!l_inf->cmd_arr[1])
+    if (!l_inf->cmd_arr[1]) 
         print_env();
     else {
-        n = parse_flags(l_inf, shell);
+        n = parse_flags(l_inf);
         if (n > 0 && l_inf->cmd_arr[1])
             reparse(l_inf, shell, n);
     }
     environ = new_env;
-    if (environ)
+    if (getenv("PATH"))
         setenv("PATH", new_path, 1);
     if (new_path)
         free(new_path);

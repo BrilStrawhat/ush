@@ -85,6 +85,9 @@ int mx_env(st_launch *l_inf, t_shell *shell);
 // pwd
 int mx_pwd(st_launch *l_inf);
 
+//cd
+int mx_cd(st_launch *l_inf);
+
 // init t_shell info
 void mx_init_shell(t_shell *shell);
 void mx_push_variable(t_variables **list, void *name, void *value);
@@ -93,6 +96,6 @@ void mx_push_variable(t_variables **list, void *name, void *value);
 int mx_exec_prog(st_launch *l_inf);
 
 // echo
-int mx_echo(char **argv, t_shell *shell);
+int mx_echo(char **argv);
 
 #endif

@@ -1,14 +1,17 @@
 #include "ush.h"
 
-static int parse_flags(st_launch *l_inf) {
+static int parse_flags(st_launch *l_inf, char *rpath) {
     if (!l_inf->cmd_arr[1] || strcmp(l_inf->cmd_arr[1], "--") == 0)
         return 0;
-    if (l_inf->cmd_arr[1][0] != '-') {
+    if (l_inf->cmd_arr[1][0] == '-' && l_inf->cmd_arr[1][1]) {
         if (mx_get_char_index(l_inf->cmd_arr[1], 'P') != -1) {
-
+            rpath = realpath(getenv("PWD"), NULL);
+            mx_printstr(rpath);
+            if (rpath)
+                mx_printchar('\n');
         }
         if (mx_get_char_index(l_inf->cmd_arr[1], 'L') != -1) {
-
+            return 0;
         }
 
         return 1;
@@ -20,19 +23,19 @@ static int parse_flags(st_launch *l_inf) {
 }
 
 int mx_pwd(st_launch *l_inf) {
-    char *pwd = NULL;
-    char *realpath;
+    char *rpath = NULL;
+    char *pwd = getenv("PWD");
 
-    if (parse_flags(l_inf)) {
-        mx_printstr("flags pwd \n");
+    
+    if (parse_flags(l_inf, rpath)) {
+        
     }
     else {
         pwd = getenv("PWD");
         mx_printstr(pwd);
-        mx_printchar('\n');
+        if (pwd)
+            mx_printchar('\n');
+        return 0;
     }
-    // char *oldpwd = getenv("OLDPWD");
-    // mx_printstr(pwd);
-
     return 1;
 }
