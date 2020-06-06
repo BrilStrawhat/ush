@@ -33,7 +33,7 @@ static int reparse(st_launch *l_inf, t_shell *shell, int n) {
 
 static void flag_u(char *arg) {
     if (!arg)
-        mx_printstr("usage: env [-u name]\n");
+        mx_printerr("usage: env [-u name]\n");
     else
     for (int i = 0; environ[i]; i++) {
         if (strstr(environ[i], arg) == 0) {
@@ -49,7 +49,7 @@ static int flag_P(st_launch *l_inf) {
         return 3;
     }
     else
-       mx_printstr("usage: env [-P utilpath] [command]\n"); 
+       mx_printerr("usage: env [-P utilpath] [command]\n"); 
     return -1;
 }
 
