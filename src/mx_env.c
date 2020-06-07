@@ -31,16 +31,20 @@ static int reparse(st_launch *l_inf, t_shell *shell, int n) {
 
 }
 
-static void flag_u(char *arg) {
-    if (!arg)
-        mx_printerr("usage: env [-u name]\n");
-    else
-    for (int i = 0; environ[i]; i++) {
-        if (strstr(environ[i], arg) == 0) {
-            mx_printstr(environ[i]);
-            mx_printchar('\n');
-        }
+static int flag_u(st_launch *l_inf) {
+    if (!l_inf->cmd_arr[2]) {
+        mx_printerr("usage: env [-u name] [arguments]\n");
+        return -1;
     }
+    if (getenv(l_inf->cmd_arr[2])) {
+        unsetenv(l_inf->cmd_arr[2]);
+        if (!l_inf->cmd_arr[3]) {
+            print_env();
+        }
+        else
+            return 3;        
+    }
+    return -1;
 }
 
 static int flag_P(st_launch *l_inf) {
@@ -60,7 +64,7 @@ static int parse_flags(st_launch *l_inf) {
         return 2;
     }
     if (mx_get_char_index(l_inf->cmd_arr[1], 'u') != -1) {
-        flag_u(l_inf->cmd_arr[2]);
+        return flag_u(l_inf);
     }
     else if (mx_get_char_index(l_inf->cmd_arr[1], 'i') != -1) {
         environ = NULL;
@@ -71,8 +75,6 @@ static int parse_flags(st_launch *l_inf) {
     }
     return -1;
 }
-
-
 
 int mx_env(st_launch *l_inf, t_shell *shell) {
     char **new_env = environ;

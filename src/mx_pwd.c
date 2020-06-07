@@ -5,16 +5,15 @@ static int parse_flags(st_launch *l_inf, char *rpath) {
         return 0;
     if (l_inf->cmd_arr[1][0] == '-' && l_inf->cmd_arr[1][1]) {
         if (mx_get_char_index(l_inf->cmd_arr[1], 'P') != -1) {
-            rpath = realpath(getenv("PWD"), NULL);
-            mx_printstr(rpath);
-            if (rpath)
-                mx_printchar('\n');
+            mx_printstr(getcwd(NULL, 0));
+            mx_printchar('\n');
         }
         if (mx_get_char_index(l_inf->cmd_arr[1], 'L') != -1) {
             return 0;
         }
     }
-    mx_printerr("pwd: bad option\n");
+    else 
+        mx_printerr("pwd: bad option\n");
 
     return 1;
 }

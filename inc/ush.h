@@ -11,10 +11,14 @@
 #include <math.h>
 #include <dirent.h>
 #include <sys/errno.h>
+#include <sys/stat.h>
+#include <dirent.h>
+
 
 extern char **environ;
 
 #define BUFSIZE 1024
+#define MX_IS_LNK(mode) (((mode) & S_IFMT) == S_IFLNK)
 
 extern char **environ;
 
