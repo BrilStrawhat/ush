@@ -11,6 +11,7 @@
 #include <math.h>
 #include <dirent.h>
 #include <sys/errno.h>
+#include <sys/stat.h>
 
 #define BUFSIZE 1024
 

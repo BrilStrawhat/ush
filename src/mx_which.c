@@ -5,14 +5,26 @@ static void costil_2(DIR *dptr, char **path) {
     mx_strdel(path);
 }
 
+static bool if_exec(char *filepath) {
+    struct stat sb;
+
+    if (stat(filepath, &sb) == 0 && sb.st_mode & S_IXUSR) 
+        return true;
+    else
+        return false;
+}
+
 static int costil_auditor(char **fpath, bool *flags, DIR *dptr, char **path) {
     if (flags == NULL) {
         costil_2(dptr, path);
         return 0;
     }
     if (flags[0] == true) {
-        mx_printstr(*fpath);
-        mx_strdel(fpath);
+        if (if_exec(*fpath) == true) {
+            mx_printstr(*fpath);
+            mx_printchar('\n');
+            mx_strdel(fpath);
+        }
         return 1;
     }
     else {
@@ -74,12 +86,16 @@ int mx_which(st_launch *l_inf) {
     flag_parser(l_inf->cmd_arr, flags, &i);
     for (; l_inf->cmd_arr[i]; i++) {
         if (mx_find_filepath(&l_inf->cmd_arr[i], &filepath, flags) != 1) {
-            if (flags[1] == true)
-                return 0;
+            if (flags[1] == true) {
+                if (if_exec(filepath) == true)
+                    return 0;
+            }
             else {
-                mx_printstr(filepath);
-                mx_printchar('\n');
-                return 0;
+                if (if_exec(filepath) == true) {
+                    mx_printstr(filepath);
+                    mx_printchar('\n');
+                    return 0;
+                }
             }
         }
     }
