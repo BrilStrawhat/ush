@@ -13,6 +13,8 @@
 #include <sys/errno.h>
 #include <sys/stat.h>
 
+extern char **environ;
+
 #define BUFSIZE 1024
 
 extern char **environ;
@@ -76,7 +78,7 @@ char *mx_three_to_one(char *first_part, char *text, char *second_part);
 //builtins
 int mx_check_builtin(st_launch *l_inf, t_shell *shell);
 void mx_start(st_launch *l_inf, t_shell *shell); // builtins and path
-void mx_start_builtin(st_launch *l_inf, t_shell *shell);
+int mx_start_builtin(st_launch *l_inf, t_shell *shell);
 
 // env
 int mx_env(st_launch *l_inf, t_shell *shell);
