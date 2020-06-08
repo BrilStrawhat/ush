@@ -35,19 +35,23 @@ auditor	./src/mx_launch_init.c	/^static void auditor(int *bufsize, char ****toks
 auditor	./src/mx_tok.c	/^static void auditor(int *bufsize, char ****toks) {$/;"	f	file:
 builtins	./inc/ush.h	/^    char **builtins;$/;"	m	struct:s_shell
 cmd	./inc/ush.h	/^    char *cmd;$/;"	m	struct:s_cmd
-cmd_arr	./inc/ush.h	/^    char **cmd_arr; \/\/ env -ppp$/;"	m	struct:launch
+cmd_arr	./inc/ush.h	/^    char **cmd_arr; \/\/ env -ppp$/;"	m	struct:s_launch
 command	./inc/ush.h	/^    struct s_cmd *command;$/;"	m	struct:s_head	typeref:struct:s_head::s_cmd
 count_par	./src/mx_ex_param.c	/^static int count_par(char *line) {$/;"	f	file:
 count_word_len	./libmx/src/mx_strsplit.c	/^static int count_word_len(const char *s, char c) {$/;"	f	file:
 create_artree	./src/mx_treefull.c	/^static char **create_artree(char *tok) {$/;"	f	file:
 create_node	./src/mx_push_variable.c	/^static t_variables *create_node(char *name, char *value) {$/;"	f	file:
 data	./libmx/inc/libmx.h	/^    void  *data;$/;"	m	struct:s_list
+env	./inc/ush.h	/^    char **env;$/;"	m	struct:s_shell
 ex_join	./src/mx_ex_param.c	/^static void ex_join(char *line, char *old_str, char **new_str) {$/;"	f	file:
 export_variables	./inc/ush.h	/^    t_variables *export_variables;$/;"	m	struct:s_shell
-filepath	./inc/ush.h	/^    char *filepath; \/\/path to binary;$/;"	m	struct:launch
+filepath	./inc/ush.h	/^    char *filepath; \/\/path to binary;$/;"	m	struct:s_launch
 fill_str	./src/mx_fill_str.c	/^static void fill_str(char **tok, int *i, char ***tmp, int *j) {$/;"	f	file:
 fillor	./src/mx_treefull.c	/^static void fillor(char *tok, t_cmd **err) {$/;"	f	file:
+flag_P	./src/mx_env.c	/^static int flag_P(st_launch *l_inf) {$/;"	f	file:
 flag_parser	./mx_echo.c	/^static void flag_parser(int argc, char **argv, bool *flags, int *i) {$/;"	f	file:
+flag_parser	./src/mx_echo.c	/^static void flag_parser(int argc, char **argv, bool *flags, int *i) {$/;"	f	file:
+flag_u	./src/mx_env.c	/^static void flag_u(st_launch *l_inf, t_shell *shell, char *arg) {$/;"	f	file:
 get_char_index	./src/mx_back_slesh.c	/^static int get_char_index(const char *str, char c, int *value) {$/;"	f	file:
 get_export	./src/mx_init_shell.c	/^static t_variables *get_export(void) {$/;"	f	file:
 get_null	./src/mx_fill_str.c	/^static char **get_null(char **tok, char **tmp, int j, int i) {$/;"	f	file:
@@ -58,7 +62,7 @@ i_count_bytes	./libmx/src/mx_read_line.c	/^static int i_count_bytes(char **data,
 i_read	./libmx/src/mx_read_line.c	/^static int i_read(char **data, const int fd, size_t buf_size, char delim) {$/;"	f	file:
 init_shlvl	./src/mx_init_shell.c	/^static void init_shlvl(t_shell *shell) {$/;"	f	file:
 is_backslash_char	./mx_echo.c	/^static bool is_backslash_char(char c) {$/;"	f	file:
-launch	./inc/ush.h	/^typedef struct launch {$/;"	s
+is_backslash_char	./src/mx_echo.c	/^static bool is_backslash_char(char c) {$/;"	f	file:
 len_par	./src/mx_ex_param.c	/^static char *len_par(char *line, int *len) {$/;"	f	file:
 main	./environ.c	/^int main(void) {$/;"	f
 main	./mx_echo.c	/^int main(int argc, char **argv) {$/;"	f
@@ -79,9 +83,11 @@ mx_create_node	./libmx/src/mx_create_node.c	/^t_list *mx_create_node(void *data)
 mx_cycle_for_quotes	./src/mx_check_quotes.c	/^int mx_cycle_for_quotes(char *line, char delim, int *i) {$/;"	f
 mx_del_extra_spaces	./libmx/src/mx_del_extra_spaces.c	/^char *mx_del_extra_spaces(const char *str) {$/;"	f
 mx_del_strarr	./libmx/src/mx_del_strarr.c	/^void mx_del_strarr(char ***arr) {$/;"	f
+mx_echo	./src/mx_echo.c	/^int mx_echo(char **argv, t_shell *shell) { \/\/ to many functions in file$/;"	f
+mx_env	./src/mx_env.c	/^int mx_env(st_launch *l_inf, t_shell *shell) {$/;"	f
 mx_ex_join	./src/mx_ex_join.c	/^void mx_ex_join(char **res, char *full_str, int *r) {$/;"	f
 mx_ex_param	./src/mx_ex_param.c	/^char *mx_ex_param(char *line) {$/;"	f
-mx_exec_prog	./src/mx_exec_prog.c	/^int mx_exec_prog(st_launch *l_inf, t_shell *shell) { \/\/ Not auditor(($/;"	f
+mx_exec_prog	./src/mx_exec_prog.c	/^int mx_exec_prog(st_launch *l_inf) { \/\/ Not auditor(($/;"	f
 mx_file_to_str	./libmx/src/mx_file_to_str.c	/^char *mx_file_to_str(const char *filename) {$/;"	f
 mx_fill_str	./src/mx_fill_str.c	/^char **mx_fill_str(char *tok, int count) {$/;"	f
 mx_find_filepath	./src/mx_find_cmd.c	/^int mx_find_filepath(char **cmd_arr, char **filepath) { \/\/ rewrite to builtin 'which'$/;"	f
@@ -128,7 +134,7 @@ mx_realloc	./libmx/src/mx_realloc.c	/^void *mx_realloc(void *ptr, size_t size) {
 mx_replace_substr	./libmx/src/mx_replace_substr.c	/^char *mx_replace_substr(const char *str, const char *sub, const char *replace) {$/;"	f
 mx_sort_list	./libmx/src/mx_sort_list.c	/^t_list *mx_sort_list(t_list *list, bool (*cmp)(void *a, void *b)) {$/;"	f
 mx_sqrt	./libmx/src/mx_sqrt.c	/^int mx_sqrt(int x) {$/;"	f
-mx_start_builtin	./src/mx_start.c	/^void mx_start_builtin(st_launch *l_inf, t_shell *shell) {$/;"	f
+mx_start_builtin	./src/mx_start.c	/^int  mx_start_builtin(st_launch *l_inf, t_shell *shell) {$/;"	f
 mx_str_reverse	./libmx/src/mx_str_reverse.c	/^void mx_str_reverse(char *s) {$/;"	f
 mx_strcat	./libmx/src/mx_strcat.c	/^char *mx_strcat(char *restrict s1, const char *restrict s2) {$/;"	f
 mx_strchr	./libmx/src/mx_strchr.c	/^char* mx_strchr(const char *s, int c) {$/;"	f
@@ -147,6 +153,7 @@ mx_strstr	./libmx/src/mx_strstr.c	/^char *mx_strstr(const char *haystack, const 
 mx_strtrim	./libmx/src/mx_strtrim.c	/^char *mx_strtrim(const char *str) {$/;"	f
 mx_swap_char	./libmx/src/mx_swap_char.c	/^void mx_swap_char(char *s1, char *s2) {$/;"	f
 mx_swap_str_ptrs	./libmx/src/mx_swap_str_ptrs.c	/^void mx_swap_str_ptrs(char **arg1, char **arg2)$/;"	f
+mx_three_to_one	./src/mx_find_cmd.c	/^char *mx_three_to_one(char *first_part, char *text, char *second_part) {$/;"	f
 mx_tilda	./src/mx_tilda.c	/^void mx_tilda(char **s) {$/;"	f
 mx_tok	./src/mx_tok.c	/^char **mx_tok(char *line) {$/;"	f
 mx_treefull	./src/mx_treefull.c	/^t_cmd *mx_treefull(char *tok) {$/;"	f
@@ -158,21 +165,29 @@ next	./libmx/inc/libmx.h	/^    struct s_list *next;$/;"	m	struct:s_list	typeref:
 numlen	./libmx/src/mx_itoa.c	/^static int numlen(long long value) {$/;"	f	file:
 open_braces	./src/mx_ex_param.c	/^static char* open_braces(char *line, int beg, int end) {$/;"	f	file:
 or	./inc/ush.h	/^    struct s_cmd *or;$/;"	m	struct:s_cmd	typeref:struct:s_cmd::s_cmd
-par	./inc/ush.h	/^    char **par; \/\/ a=b b=c ..$/;"	m	struct:launch
+par	./inc/ush.h	/^    char **par; \/\/ a=b b=c ..$/;"	m	struct:s_launch
+parse_flags	./src/mx_env.c	/^static int parse_flags(st_launch *l_inf, t_shell *shell) {$/;"	f	file:
+print_env	./src/mx_env.c	/^static void print_env() {$/;"	f	file:
 print_error	./src/mx_exec_prog.c	/^static void print_error(st_launch *l_inf) {$/;"	f	file:
 print_flag_e	./mx_echo.c	/^static void print_flag_e(int argc, int i, char **argv) {$/;"	f	file:
+print_flag_e	./src/mx_echo.c	/^static void print_flag_e(int argc, int i, char **argv) {$/;"	f	file:
 print_hex	./mx_echo.c	/^static void print_hex(const char *str, int *j) {$/;"	f	file:
+print_hex	./src/mx_echo.c	/^static void print_hex(const char *str, int *j) {$/;"	f	file:
 print_octal	./mx_echo.c	/^static void print_octal(const char *str, int *j) {$/;"	f	file:
+print_octal	./src/mx_echo.c	/^static void print_octal(const char *str, int *j) {$/;"	f	file:
 pwd	./inc/ush.h	/^    char *pwd;$/;"	m	struct:s_shell
 read_line	./src/mx_loop.c	/^static char *read_line(void) {$/;"	f	file:
+reparse	./src/mx_env.c	/^static int reparse(st_launch *l_inf, t_shell *shell, int n) {$/;"	f	file:
 replace_backslash_char	./mx_echo.c	/^static void replace_backslash_char(char c) {$/;"	f	file:
+replace_backslash_char	./src/mx_echo.c	/^static void replace_backslash_char(char c, int *j) {$/;"	f	file:
 s_cmd	./inc/ush.h	/^typedef struct s_cmd {$/;"	s
 s_head	./inc/ush.h	/^typedef struct s_head {$/;"	s
+s_launch	./inc/ush.h	/^typedef struct s_launch {$/;"	s
 s_list	./libmx/inc/libmx.h	/^typedef struct  s_list {$/;"	s
 s_shell	./inc/ush.h	/^typedef struct s_shell {$/;"	s
 s_variables	./inc/ush.h	/^typedef struct s_variables {$/;"	s
 ss_strlen	./libmx/src/mx_hex_to_nbr.c	/^static int ss_strlen(const char *str) {$/;"	f	file:
-st_launch	./inc/ush.h	/^}              st_launch;$/;"	t	typeref:struct:launch
+st_launch	./inc/ush.h	/^}              st_launch;$/;"	t	typeref:struct:s_launch
 status	./inc/ush.h	/^    int status;$/;"	m	struct:s_shell
 strfdup	./src/mx_init_shell.c	/^static char *strfdup(char *str, int n) {$/;"	f	file:
 t_cmd	./inc/ush.h	/^}              t_cmd;$/;"	t	typeref:struct:s_cmd
@@ -186,11 +201,7 @@ tilda_plus	./src/mx_tilda.c	/^static void tilda_plus(char **line) {$/;"	f	file:
 tilda_user	./src/mx_tilda.c	/^static void tilda_user(char **line) {$/;"	f	file:
 tokensize	./src/mx_launch_init.c	/^static void tokensize(char *line, char ***toks, int bufsize, int position) {$/;"	f	file:
 tokensize	./src/mx_tok.c	/^static int tokensize(char *line, char ***toks, int bufsize, int position) {$/;"	f	file:
-type	./inc/ush.h	/^    int type; \/\/ no cmd found , builtin, binary      (alias, shell func)$/;"	m	struct:launch
+type	./inc/ush.h	/^    int type; \/\/ no cmd found , builtin, binary      (alias, shell func)$/;"	m	struct:s_launch
 valid_operator	./src/mx_check_line.c	/^static int valid_operator(char *line, int i) {$/;"	f	file:
 value	./inc/ush.h	/^    char *value;$/;"	m	struct:s_variables
 variables	./inc/ush.h	/^    t_variables *variables;$/;"	m	struct:s_shell
-flag_parser	mx_echo.c	/^static void flag_parser(int argc, char **argv, boo/
-is_backslash_char	mx_echo.c	/^static bool is_backslash_char(char c) {$/
-print_octal	mx_echo.c	/^static void print_octal(const char *str, int *j) {/
-replace_backslash_char	mx_echo.c	/^static void replace_backslash_char(char c) {$/

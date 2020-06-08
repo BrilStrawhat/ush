@@ -11,6 +11,7 @@
 #include <math.h>
 #include <dirent.h>
 #include <sys/errno.h>
+#include <sys/stat.h>
 
 extern char **environ;
 
@@ -72,10 +73,10 @@ char *mx_trim_token(char *str);
 char **mx_fill_str(char *tok, int count);
 void mx_launch_cmd(t_head *forest, t_shell *shell);
 st_launch *mx_launch_init(char *cmd, t_shell *shell);
+char *mx_three_to_one(char *first_part, char *text, char *second_part);
 
 //builtins
 int mx_check_builtin(st_launch *l_inf, t_shell *shell);
-int mx_find_filepath(char **cmd_arr, char **filepath);
 void mx_start(st_launch *l_inf, t_shell *shell); // builtins and path
 int mx_start_builtin(st_launch *l_inf, t_shell *shell);
 
@@ -91,5 +92,9 @@ int mx_exec_prog(st_launch *l_inf);
 
 // echo
 int mx_echo(char **argv, t_shell *shell);
+
+// which
+int mx_which(st_launch *l_inf);
+int mx_find_filepath(char **cmd_arr, char **filepath, void *flags);
 
 #endif
