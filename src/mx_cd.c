@@ -42,7 +42,8 @@ static int change_dir(st_launch *l_inf, char *path) {
             setenv("OLDPWD", getenv("PWD"), 1);
         if (getcwd(NULL, 0))
             setenv("PWD", getcwd(NULL, 0), 1);
-        if (strcmp(l_inf->cmd_arr[1], "-") != 0 && includes_link(path)){
+        if (strcmp(l_inf->cmd_arr[1], "-P") != 0 &&
+            strcmp(l_inf->cmd_arr[1], "-") != 0 && includes_link(path)){
             link = mx_strdup(includes_link_P(path));
             setenv("PWD", link, 1);
             free(link);
