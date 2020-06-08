@@ -58,16 +58,6 @@ char *mx_strarr_to_str(char **strarr, char *delim) {
     return str;
 }
 
-char mx_check_link(char **path, char *full_path) {
-    struct stat st;
-
-    mx_strdel(path);
-    if (lstat(full_path, &st) != -1 && MX_IS_LNK(st.st_mode))
-        return 1;
-
-    return 0;
-}
-
 char  *includes_link_P(char *destination) {
     char **split = mx_strsplit(destination, '/');
     char *path = NULL;

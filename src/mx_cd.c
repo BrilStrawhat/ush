@@ -1,5 +1,16 @@
 #include"ush.h"
 
+
+char mx_check_link(char **path, char *full_path) {
+    struct stat st;
+
+    mx_strdel(path);
+    if (lstat(full_path, &st) != -1 && MX_IS_LNK(st.st_mode))
+        return 1;
+
+    return 0;
+}
+
 static char includes_link(char *destination) {
     char **split = mx_strsplit(destination, '/');
     char *path = NULL;
