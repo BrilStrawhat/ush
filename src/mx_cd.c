@@ -158,5 +158,7 @@ int mx_cd(st_launch *l_inf) {
     }
     else if (l_inf->cmd_arr[1] && strcmp(l_inf->cmd_arr[1], "-P") ==0)
         return change_dir(l_inf, l_inf->cmd_arr[2]);
-    return change_dir(l_inf, l_inf->cmd_arr[1]);
+    else 
+        return change_dir(l_inf, l_inf->cmd_arr[1]);
+    return 1;
 }
