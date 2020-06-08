@@ -94,6 +94,8 @@ char *mx_build_path(char *pwd, char *fname);
 int mx_strarr_len(char **strarr);
 char *mx_strarr_to_str(char **strarr, char *delim);
 char mx_check_link(char **path, char *full_path);
+char *path_constructor(char *path, char *fname);
+char  *includes_link_P(char *destination);
 
 // init t_shell info
 void mx_init_shell(t_shell *shell);
