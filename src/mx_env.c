@@ -1,16 +1,5 @@
 #include "ush.h"
 
-static void print_env() {
-    int i = 0;
-    if (environ == NULL)
-        return;
-    while (environ[i]) {
-        mx_printstr(environ[i]);
-        mx_printchar('\n');
-        i++;
-    }
-}
-
 static int reparse(st_launch *l_inf, t_shell *shell, int n) {
     int i = n; 
 

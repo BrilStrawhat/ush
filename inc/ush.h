@@ -84,6 +84,7 @@ int mx_start_builtin(st_launch *l_inf, t_shell *shell);
 
 // env
 int mx_env(st_launch *l_inf, t_shell *shell);
+void print_env();
 
 // pwd
 int mx_pwd(st_launch *l_inf);
