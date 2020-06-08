@@ -18,7 +18,7 @@ SRC		=	main.c mx_loop.c mx_create_head.c mx_tok.c \
 			mx_fill_str.c mx_launch_cmd.c mx_launch_init.c \
 			mx_find_cmd.c mx_start.c \
 			mx_exec_prog.c mx_env.c \
-			mx_echo.c mx_pwd.c mx_cd.c
+			mx_echo.c mx_pwd.c mx_cd.c\
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))

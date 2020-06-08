@@ -91,6 +91,10 @@ int mx_pwd(st_launch *l_inf);
 
 //cd
 int mx_cd(st_launch *l_inf);
+char *mx_build_path(char *pwd, char *fname);
+int mx_strarr_len(char **strarr);
+char *mx_strarr_to_str(char **strarr, char *delim);
+char mx_check_link(char **path, char *full_path);
 
 // init t_shell info
 void mx_init_shell(t_shell *shell);

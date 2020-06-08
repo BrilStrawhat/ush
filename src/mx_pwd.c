@@ -22,7 +22,6 @@ int mx_pwd(st_launch *l_inf) {
     char *rpath = NULL;
     char *pwd = getenv("PWD");
 
-    
     if (parse_flags(l_inf, rpath)) {
         
     }
