@@ -114,7 +114,7 @@ static void print_flag_e(int argc, int i, char **argv) {
     }
 }
 
-int mx_echo(char **argv, t_shell *shell) { // to many functions in file
+int mx_echo(char **argv) { // to many functions in file
     bool flags[3] = {false}; // 0 is -n, 1 is -E, 2 is -e
     int i = 1;
     int argc = 0;

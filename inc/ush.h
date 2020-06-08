@@ -12,10 +12,12 @@
 #include <dirent.h>
 #include <sys/errno.h>
 #include <sys/stat.h>
+#include <dirent.h>
 
 extern char **environ;
 
 #define BUFSIZE 1024
+#define MX_IS_LNK(mode) (((mode) & S_IFMT) == S_IFLNK)
 
 extern char **environ;
 
@@ -83,6 +85,18 @@ int mx_start_builtin(st_launch *l_inf, t_shell *shell);
 // env
 int mx_env(st_launch *l_inf, t_shell *shell);
 
+// pwd
+int mx_pwd(st_launch *l_inf);
+
+//cd
+int mx_cd(st_launch *l_inf);
+char *mx_build_path(char *pwd, char *fname);
+int mx_strarr_len(char **strarr);
+char *mx_strarr_to_str(char **strarr, char *delim);
+char mx_check_link(char **path, char *full_path);
+char *path_constructor(char *path, char *fname);
+char  *includes_link_P(char *destination);
+
 // init t_shell info
 void mx_init_shell(t_shell *shell);
 void mx_push_variable(t_variables **list, void *name, void *value);
@@ -91,7 +105,7 @@ void mx_push_variable(t_variables **list, void *name, void *value);
 int mx_exec_prog(st_launch *l_inf);
 
 // echo
-int mx_echo(char **argv, t_shell *shell);
+int mx_echo(char **argv);
 
 // which
 int mx_which(st_launch *l_inf);

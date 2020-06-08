@@ -58,6 +58,8 @@ char *mx_strjoin(const char *s1, const char *s2);
 int mx_read_line(char **lineptr, size_t buf_size, char delim, const int fd);
 char *mx_replace_substr(const char *str, const char *sub, const char *replace);
 
+
+
 // Memory pack
 
 void *mx_memset(void *b, int c, size_t len);
