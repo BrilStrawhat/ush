@@ -153,8 +153,8 @@ int mx_cd(st_launch *l_inf) {
         }
     }
     else if (strcmp(l_inf->cmd_arr[1], "-s") == 0 && includes_link(l_inf->cmd_arr[2])){
-        // mx_printstr(includes_link(l_inf->cmd_arr[2]));
         mx_printerr("cd: not a directory\n"); 
+        return change_dir(l_inf, l_inf->cmd_arr[1]);
     }
     else if (l_inf->cmd_arr[1] && strcmp(l_inf->cmd_arr[1], "-P") ==0)
         return change_dir(l_inf, l_inf->cmd_arr[2]);
