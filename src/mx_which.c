@@ -58,17 +58,9 @@ static void flag_parser(char **argv, bool *flags, int *i) {
 int mx_find_filepath(char **cmd_arr, char **filepath, void *flags) { 
     char *path = getenv("PATH");
     DIR *dptr;
-    if (path == NULL){
-        char *pathbuf;
-           size_t n;
 
-           n = confstr(_CS_PATH, NULL, (size_t) 0);
-           pathbuf = malloc(n);
-           if (pathbuf == NULL)
-               abort();
-           confstr(_CS_PATH, pathbuf, n);
-           path = pathbuf;
-    }
+    if (path == NULL)
+        path = mx_find_filepath2(path);
     if (path != NULL) {
         path = mx_strdup(path);
         for (char *tok = strtok(path, ":"); tok; tok = strtok(NULL, ":")) {
