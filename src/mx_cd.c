@@ -152,13 +152,15 @@ int mx_cd(st_launch *l_inf) {
             return 1;
         }
     }
-    else if (strcmp(l_inf->cmd_arr[1], "-s") == 0 && includes_link(l_inf->cmd_arr[2])){
+    else if (strcmp(l_inf->cmd_arr[1], "-s") == 0){
+        if (includes_link(l_inf->cmd_arr[2])) {
         mx_printerr("cd: not a directory\n"); 
-        return change_dir(l_inf, l_inf->cmd_arr[1]);
+        return 1;
+        }
+        else 
+            return change_dir(l_inf, l_inf->cmd_arr[2]);
     }
     else if (l_inf->cmd_arr[1] && strcmp(l_inf->cmd_arr[1], "-P") ==0)
         return change_dir(l_inf, l_inf->cmd_arr[2]);
-    else 
-        return change_dir(l_inf, l_inf->cmd_arr[1]);
-    return 1;
+    return change_dir(l_inf, l_inf->cmd_arr[1]);
 }
