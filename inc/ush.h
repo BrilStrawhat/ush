@@ -54,6 +54,12 @@ typedef struct s_launch {
     int type; // no cmd found , builtin, binary      (alias, shell func)
 }              st_launch;
 
+typedef struct s_job {
+    char *cmd;
+    pid_t pid;
+    int status;
+}               t_job;
+
 
 void mx_loop(t_head *head);
 t_head *mx_create_head(char *line);
@@ -80,7 +86,7 @@ char *mx_three_to_one(char *first_part, char *text, char *second_part);
 //builtins
 int mx_check_builtin(st_launch *l_inf, t_shell *shell);
 void mx_start(st_launch *l_inf, t_shell *shell); // builtins and path
-int mx_start_builtin(st_launch *l_inf, t_shell *shell);
+int  mx_start_builtin(st_launch *l_inf, t_list **jobs, t_shell *shell);
 
 // env
 int mx_env(st_launch *l_inf, t_shell *shell);
@@ -103,7 +109,7 @@ void mx_init_shell(t_shell *shell);
 void mx_push_variable(t_variables **list, void *name, void *value);
 
 // fork and exec
-int mx_exec_prog(st_launch *l_inf);
+int mx_exec_prog(st_launch *l_inf, t_list **jobs);
 
 // echo
 int mx_echo(char **argv);
@@ -116,5 +122,8 @@ int mx_unset(st_launch *l_inf);
 int mx_which(st_launch *l_inf);
 int mx_find_filepath(char **cmd_arr, char **filepath, void *flags);
 char *mx_find_filepath2(char *path);
+
+// fg
+int mx_fg(st_launch *l_inf, t_list **jobs);
 
 #endif

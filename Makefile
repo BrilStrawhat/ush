@@ -22,6 +22,7 @@ SRC		=	main.c mx_loop.c mx_create_head.c mx_tok.c \
 			mx_echo.c \
 			mx_which.c mx_find_filepath2.c mx_unset.c \
 			mx_export.c \
+			mx_fg.c \
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
 OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))
