@@ -18,5 +18,7 @@ int mx_export(st_launch *l_inf) {
         free(var);
     if(val)
         free(val);
+    if (export)
+        free(export);
     return 0;
 }
