@@ -74,13 +74,17 @@ static void init_shlvl(t_shell *shell) {
 }
 
 static char **mx_init_builtin() {
-    char **builtins = malloc(6 * sizeof(char *));
+    char **builtins = malloc(10 * sizeof(char *));
     builtins[0] = "pwd";
     builtins[1] = "env";
     builtins[2] = "which";
     builtins[3] = "echo";
 	builtins[4] = "cd";
-    builtins[5] = NULL;
+    builtins[5] = "fg";
+    builtins[6] = "export";
+    builtins[7] = "unset";
+    builtins[8] = "exit";
+    builtins[9] = NULL;
     return builtins;
 }
 

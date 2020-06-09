@@ -13,8 +13,12 @@ int  mx_start_builtin(st_launch *l_inf, t_shell *shell) {
                return mx_pwd(l_inf);
           else if (strcmp("cd", shell->builtins[i]) == 0)
                return mx_cd(l_inf);
-           if (strcmp("which", shell->builtins[i]) == 0)
-               mx_which(l_inf); 
+          else if (strcmp("which", shell->builtins[i]) == 0)
+               return mx_which(l_inf); 
+          else if (strcmp("export", shell->builtins[i]) == 0)
+               return mx_export(l_inf);
+          else if (strcmp("unset", shell->builtins[i]) == 0)
+               return mx_unset(l_inf);
         }
     }
     return 0;
