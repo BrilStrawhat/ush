@@ -7,6 +7,13 @@ static char *read_line(void) {
     getline(&tmp, &bufsize, stdin);
     return tmp;
 }
+
+static void signal_for_parent(void) {
+    // signal(SIGINT, SIG_DFL); // C-c
+    signal(SIGQUIT, SIG_IGN);
+    signal(SIGTSTP, SIG_IGN);
+}
+
 void mx_loop(t_head *head) {
     char *line = NULL;
     int status = 0;
@@ -14,6 +21,7 @@ void mx_loop(t_head *head) {
     bzero(shell, sizeof(t_shell));
 
     mx_init_shell(shell);
+    signal_for_parent();
     while (1) {
         mx_printstr("u$h> ");
         line = read_line();
