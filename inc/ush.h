@@ -76,6 +76,7 @@ char **mx_fill_str(char *tok, int count);
 void mx_launch_cmd(t_head *forest, t_shell *shell);
 st_launch *mx_launch_init(char *cmd, t_shell *shell);
 char *mx_three_to_one(char *first_part, char *text, char *second_part);
+char *mx_dollar(char *line);
 
 //builtins
 int mx_check_builtin(st_launch *l_inf, t_shell *shell);

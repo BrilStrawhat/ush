@@ -33,8 +33,9 @@ void mx_loop(t_head *head) {
                 continue;
             }
         */
-           //mx_tilda(&line);
-           //mx_printstr(line);
+           //mx_tilda(&line);  NEED TO FIX//////////////////////////////////////////////////////////
+           //char *new = mx_dollar(line);
+           //mx_printstr(new);
         
             head = mx_create_head(line);
             

@@ -92,8 +92,10 @@ static void print_hex(const char *str, int *j) {
 }
 
 static void print_flag_e(int argc, int i, char **argv) {
-    for (; i < argc; i++) {
-        for (int j = 0; argv[i][j] != '\0'; j++) {
+    mx_printint(argc); mx_printstr("ARGC \n");
+    mx_printint(i); mx_printstr("I \n");
+    for (; i < argc; i++) { // add -1 
+        for (int j = 0; argv[i] && argv[i][j] != '\0'; j++) {
             if (argv[i][j] == '\\') {
                 if (is_backslash_char(argv[i][j + 1]) == true) { 
                     replace_backslash_char(argv[i][j + 1], &j);
@@ -111,6 +113,8 @@ static void print_flag_e(int argc, int i, char **argv) {
             mx_printchar(argv[i][j]);
         }
         mx_printchar(' ');
+        //mx_printstr(argv[i++]);
+        //mx_printint(i); mx_printstr("I \n\n\n");
     }
 }
 
@@ -124,10 +128,13 @@ int mx_echo(char **argv) { // to many functions in file
         return 0;
     flag_parser(argc, argv, flags, &i);
     if (flags[2] == true ||
-       (flags[0] == false && flags[1] == false && flags[2] == false))
+       (flags[0] == false && flags[1] == false && flags[2] == false)) {
         print_flag_e(argc, i, argv);
+        mx_printstr("HERE \n");
+       }
     else 
         while (i < argc) {
+                    mx_printstr("HERE1111 \n");
             mx_printstr(argv[i++]);
         }
     if (flags[0] == false) 

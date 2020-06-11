@@ -1,6 +1,5 @@
 #include"ush.h"
 
-
 char mx_check_link(char **path, char *full_path) {
     struct stat st;
 
