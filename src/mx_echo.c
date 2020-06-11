@@ -119,8 +119,7 @@ int mx_echo(char **argv) { // to many functions in file
     int i = 1;
     int argc = 0;
     int *exit_st = mx_exit_status();
-        mx_printint(*exit_st);
-        mx_printchar('\n');
+
 
     for (; argv[argc] != NULL; argc++);
     if (argc < 2)
