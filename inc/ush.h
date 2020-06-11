@@ -126,4 +126,7 @@ char *mx_find_filepath2(char *path);
 // fg
 int mx_fg(st_launch *l_inf, t_list **jobs);
 
+// jobs
+int mx_jobs(t_list **jobs);
+
 #endif

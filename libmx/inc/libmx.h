@@ -5,9 +5,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <wchar.h>
-//#include <stdio.h> 
 #include <fcntl.h>
-//#include <string.h>
 
 void mx_swap_str_ptrs(char **arg1, char **arg2);
 bool mx_isspace(int c);

@@ -13,9 +13,39 @@ static void print_error(st_launch *l_inf) {
     }
 }
 
-// int mx_fg(st_launch *l_inf, t_list *jobs, pid_t *pid) {
-    
-// }
+int mx_jobs(t_list **jobs) {
+   if (jobs == NULL || *jobs == NULL)
+      return 0;
+    t_list *tj = *jobs;
+    t_job *cast = NULL;
+ 
+    for (; tj != NULL; tj = tj->next) {
+        cast = (t_job*)tj->data;         
+        mx_printint(cast->pid);
+        mx_printstr(" ");
+        mx_printstr(cast->cmd);
+        mx_printstr("\n");
+    }
+    return 0;
+}
+
+int mx_pop_job(t_list **jobs, int num) {
+    if (jobs == NULL || *jobs == NULL)
+        return 0;
+    t_list *cur = *jobs;
+    t_list *bef = NULL;
+
+    for (int i = 0; cur != NULL || i < num; i++)
+
+
+}
+
+int mx_fg(st_launch *l_inf, t_list **jobs, pid_t *pid) {
+    if (jobs == NULL || *jobs == NULL)
+        return 0;
+    mx_pop_job(jobs, atoi(l_inf->cmd_arr[1]));
+    return 0;
+}
 
 
 t_job *mx_create_job(st_launch *l_inf, pid_t pid, int status) {
@@ -40,25 +70,9 @@ t_job *mx_create_job(st_launch *l_inf, pid_t pid, int status) {
 }
 
 void mx_add_to_list(st_launch *l_inf, pid_t pid, t_list **jobs, int status) {
-    if (*jobs == NULL)
-        mx_printstr("tut\n");
-    if (*jobs == NULL)
-        *jobs = (t_list*)malloc(sizeof(t_list)); // mx_create_node???
     t_job *job = mx_create_job(l_inf, pid, status);
-    if (job == NULL || jobs == NULL || *jobs == NULL)
-       mx_printstr("\n\n\n\n\n\n\tut\n\n\n\n\n\n\n\n");
-    if (job && jobs)
-       mx_printstr("Hello");
-    mx_printstr(job->cmd);
-    mx_printchar(' ');
-    mx_printint(job->pid);
-    mx_printchar(' ');
-    mx_printint(job->status);
-    mx_printchar('\n');
-    (*jobs)->data = job;
-    (*jobs)->next = NULL;
-   
-    // mx_push_back(jobs, job);
+
+    mx_push_back(jobs, job);
 }
 
 void signal_for_child(void) {

@@ -21,6 +21,8 @@ int mx_start_builtin(st_launch *l_inf, t_list **jobs, t_shell *shell) {
                return mx_unset(l_inf);
           else if (strcmp("fg", shell->builtins[i]) == 0)
                return mx_fg(l_inf, jobs);
+          else if (strcmp("jobs", shell->builtins[i]) == 0)
+               return mx_jobs(jobs);
         }
     }
     return 0;
