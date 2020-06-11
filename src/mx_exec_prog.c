@@ -34,5 +34,5 @@ int mx_exec_prog(st_launch *l_inf) { // Not auditor((
             return -1;
         }
     }
-    return status;
+    return WEXITSTATUS(status);
 }
