@@ -23,7 +23,7 @@ static char *open_dollar(char *old_str) {
     if (env) {
         resul_env = getenv(env);
         if (resul_env != NULL) {
-            return_env = mx_three_to_one(resul_env, " ", &old_str[i]);
+            return_env = mx_three_to_one(mx_strtrim(resul_env), " ", mx_strtrim(&old_str[i]));
             mx_strdel(&env);
             return return_env;
         }
@@ -46,8 +46,8 @@ char *mx_dollar(char *line) {
                 work_str = mx_strndup(line, count -1);
             env = open_dollar(&line[count + 1]);
             if (work_str && env) {
-            full_str = mx_three_to_one(work_str, " ", env);
-            return full_str;
+                full_str = mx_three_to_one(mx_strtrim(work_str), " ", mx_strtrim(env));
+                return full_str;
             }
         }
     }
