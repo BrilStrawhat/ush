@@ -42,6 +42,8 @@ static void check_dollar(char *str, int *kk) {
         (*kk) += 1;
         check_dollar(&str[i + 1], &(*kk));
     }
+    else if (i == 0)
+        (*kk) += 1;
 }
 
 st_launch *mx_launch_init(char *cmd, t_shell *shell) {
@@ -64,6 +66,7 @@ st_launch *mx_launch_init(char *cmd, t_shell *shell) {
 
  int kk = 0;
  check_dollar(cmd, &kk);
+ mx_printint(kk); // $PWD  return 0 /// need return > 0
 
     while (kk) {
         char *tmp = NULL;
@@ -78,7 +81,7 @@ st_launch *mx_launch_init(char *cmd, t_shell *shell) {
         kk--;
 }
 
-// mx_printstr(cmd); exit(1);
+//mx_printstr(cmd); exit(1);
 // create_arr_args
     tokensize(cmd, &command, 64, 0);
     l_inf->cmd_arr = command;

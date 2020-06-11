@@ -26,6 +26,7 @@ void mx_loop(t_head *head) {
                 status = 258;// errno
                 continue;
             }
+            mx_pwd_replace(&line);
         // line = valid ${}
             /*line = mx_ex_param(line);
             if (!line) {
