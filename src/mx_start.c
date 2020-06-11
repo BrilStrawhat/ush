@@ -7,7 +7,7 @@ int  mx_start_builtin(st_launch *l_inf, t_shell *shell) {
           if (strcmp("env", shell->builtins[i]) == 0)
                return mx_env(l_inf, shell);
           else if (strcmp("echo", shell->builtins[i]) == 0)
-               return mx_echo(l_inf, l_inf->cmd_arr);
+               return mx_echo(l_inf->cmd_arr);
           else if (strcmp("pwd", shell->builtins[i]) == 0)
                return mx_pwd(l_inf);
           else if (strcmp("cd", shell->builtins[i]) == 0)

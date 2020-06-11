@@ -106,7 +106,7 @@ void mx_push_variable(t_variables **list, void *name, void *value);
 int mx_exec_prog(st_launch *l_inf);
 
 // echo
-int mx_echo(st_launch *l_inf, char **argv);
+int mx_echo(char **argv);
 
 // export, import and exit
 int mx_export(st_launch *l_inf);
