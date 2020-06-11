@@ -114,11 +114,17 @@ static void print_flag_e(int argc, int i, char **argv) {
     }
 }
 
-int mx_echo(char **argv) { // to many functions in file
+int mx_echo(st_launch *l_inf, char **argv) { // to many functions in file
     bool flags[3] = {false}; // 0 is -n, 1 is -E, 2 is -e
     int i = 1;
     int argc = 0;
+    int *exit_st = mx_exit_status();
 
+    if (l_inf->cmd_arr[1] && strcmp(l_inf->cmd_arr[1], "$?") == 0) {
+        mx_printint(*exit_st);
+        mx_printchar('\n');
+        return 0;
+    }
     for (; argv[argc] != NULL; argc++);
     if (argc < 2)
         return 0;
