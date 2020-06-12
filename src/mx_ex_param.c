@@ -59,7 +59,6 @@ static char *len_par(char *line, int *len) {
                     return NULL;
             }
         }
-        if (line[i+1] && line[i] == '$' && line[i+1] == '{')
      }
      return param;
 }
