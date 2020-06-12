@@ -60,7 +60,7 @@ int mx_find_filepath(char **cmd_arr, char **filepath, void *flags) {
     DIR *dptr;
 
     if (path == NULL)
-        path = mx_find_filepath2(path);
+        path = mx_find_filepath2();
     if (path != NULL) {
         path = mx_strdup(path);
         for (char *tok = strtok(path, ":"); tok; tok = strtok(NULL, ":")) {

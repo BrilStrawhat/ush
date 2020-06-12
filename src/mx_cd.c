@@ -70,7 +70,7 @@ static int old_cd(st_launch *l_inf) {
 }
 
 int mx_cd(st_launch *l_inf) {
-    if (!l_inf->cmd_arr[1]){
+    if (!l_inf->cmd_arr[1] || l_inf->cmd_arr[1][0] == '~'){
         if (getenv("HOME"))
             return change_dir(l_inf, getenv("HOME"));
     }

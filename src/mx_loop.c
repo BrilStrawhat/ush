@@ -44,7 +44,7 @@ void mx_loop(t_head *head) {
             if (!head) { // new
                 continue;
             }
-            if (line != NULL) {
+            if (line != NULL && head) {
                 mx_launch_cmd(head, shell);
                 continue;
             }
