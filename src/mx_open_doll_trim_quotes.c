@@ -36,7 +36,7 @@ void mx_open_doll_trim_quotes(char ***command) {
     int kk = 0;
 
     for (int k = 0; (*command)[k]; k++) {
-        char *str = trim_dquotes((*command)[k]);
+        char *str = mx_strtrim((trim_dquotes((*command)[k])));
         mx_strdel(&(*command)[k]);
         kk = 0;
         check_dollar(str, &kk);

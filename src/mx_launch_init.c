@@ -57,17 +57,6 @@ static void tokensize(char *line, char ***toks, int bufsize, int position) {
 }
 
 
-// static void check_dollar(char *str, int *kk) {
-//     int i = mx_check_quotes(str, '$');
-
-//     if (i > 0 && i != 100) {
-//         (*kk) += 1;
-//         check_dollar(&str[i + 1], &(*kk));
-//     }
-//     if ((*kk) == 0 || str[0] == '&') 
-//         (*kk) += 1;
-// }
-
 st_launch *mx_launch_init(char *cmd, t_shell *shell) {
     st_launch *l_inf = malloc(sizeof(st_launch)); // в отдельную функцию 
     l_inf->filepath = NULL;
@@ -83,7 +72,7 @@ st_launch *mx_launch_init(char *cmd, t_shell *shell) {
     }
 // create_arr_args
     tokensize(cmd, &command, 64, 0);
-   mx_open_doll_trim_quotes(&command);
+    mx_open_doll_trim_quotes(&command);
 
 
 
