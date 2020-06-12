@@ -111,10 +111,13 @@ int mx_echo(char **argv);
 // export, import and exit
 int mx_export(st_launch *l_inf);
 int mx_unset(st_launch *l_inf);
+int mx_exit(st_launch *l_inf);
 
 // which
 int mx_which(st_launch *l_inf);
 int mx_find_filepath(char **cmd_arr, char **filepath, void *flags);
 char *mx_find_filepath2(char *path);
 
+// exit
+int *mx_exit_status(void);
 #endif

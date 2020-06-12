@@ -34,9 +34,6 @@ static void tokensize(char *line, char ***toks, int bufsize, int position) {
 }
 
 st_launch *mx_launch_init(char *cmd, t_shell *shell) {
-    if (shell) {
-
-    }
     //int index = -1;
     st_launch *l_inf = malloc(sizeof(st_launch)); // в отдельную функцию 
     l_inf->filepath = NULL;
