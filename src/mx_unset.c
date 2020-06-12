@@ -1,8 +1,8 @@
 #include "ush.h"
 
 int mx_unset(st_launch *l_inf) {
-    if (l_inf->cmd_arr[1]){
-        unsetenv(l_inf->cmd_arr[1]);
+    for (int i = 0; l_inf->cmd_arr[i]; i++){
+        unsetenv(l_inf->cmd_arr[i]);
     }
     return 0;
 }

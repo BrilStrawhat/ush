@@ -1,10 +1,9 @@
 #include "ush.h"
 
 int  mx_start_builtin(st_launch *l_inf, t_shell *shell) {
+    int *exit_st = mx_exit_status();
      for (int i = 0; shell->builtins[i]; i++) {
-        if (strcmp(l_inf->cmd_arr[0], shell->builtins[i]) == 0) { // find biultin in finction (mx_init_shell)    // add your builtins
-           // shell->status = your_function(l_inf->cmd_arr, shell); // your function where you work with builtins/   you need return shell->statur = 0; if Ok!
-               mx_printstr("Builtins\n");
+        if (strcmp(l_inf->cmd_arr[0], shell->builtins[i]) == 0) {
           if (strcmp("env", shell->builtins[i]) == 0)
                return mx_env(l_inf, shell);
           else if (strcmp("echo", shell->builtins[i]) == 0)
@@ -19,7 +18,9 @@ int  mx_start_builtin(st_launch *l_inf, t_shell *shell) {
                return mx_export(l_inf);
           else if (strcmp("unset", shell->builtins[i]) == 0)
                return mx_unset(l_inf);
+          else if (strcmp("exit", shell->builtins[i]) == 0)
+               return mx_exit(l_inf);
         }
     }
-    return 0;
+    return *exit_st;
 }

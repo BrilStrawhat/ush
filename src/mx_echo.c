@@ -143,6 +143,8 @@ int mx_echo(char **argv) { // to many functions in file
     bool flags[3] = {false}; // 0 is -n, 1 is -E, 2 is -e
     int i = 1;
     int argc = 0;
+    int *exit_st = mx_exit_status();
+
 
     for (; argv[argc] != NULL; argc++);
     if (argc < 2)

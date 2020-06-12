@@ -1,16 +1,24 @@
 #include "ush.h"
 
-static void print_error(st_launch *l_inf) {
-    if (errno == ENOENT) {
-        mx_printerr("ush: command ");
-        mx_printerr(l_inf->cmd_arr[0]);
-        mx_printerr(" not found\n");
-    }
-    else {
-        mx_printerr("ush: ");
-        mx_printstr(strerror(errno));
-        mx_printchar('\n');
-    }
+static void print_error(st_launch *l_inf) {                                       
+    struct stat path_stat;                                                        
+                                  
+    stat(l_inf->cmd_arr[0], &path_stat);                                          
+    if (S_ISDIR(path_stat.st_mode)) {                                             
+        mx_printerr("ush: ");                                                     
+        mx_printerr(l_inf->cmd_arr[0]);                                           
+        mx_printerr(": Is a directory\n");                                        
+    }                                                                             
+    else if (errno == ENOENT) {                                                   
+        mx_printerr("ush: command ");                                             
+        mx_printerr(l_inf->cmd_arr[0]);                                           
+        mx_printerr(" not found\n");                                              
+    }                                                                             
+    else {                                                                        
+        mx_printerr("ush: ");                                                     
+        mx_printstr(strerror(errno));                                             
+        mx_printchar('\n');                                                       
+    }                                                                             
 }
 
 int mx_exec_prog(st_launch *l_inf) { // Not auditor((
@@ -34,5 +42,5 @@ int mx_exec_prog(st_launch *l_inf) { // Not auditor((
             return -1;
         }
     }
-    return status;
+    return WEXITSTATUS(status);
 }

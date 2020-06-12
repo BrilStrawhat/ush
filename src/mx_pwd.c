@@ -30,7 +30,7 @@ int mx_pwd(st_launch *l_inf) {
         mx_printstr(pwd);
         if (pwd)
             mx_printchar('\n');
-        return 0;
+        return 1;
     }
     return 1;
 }
