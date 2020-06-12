@@ -20,7 +20,7 @@ static char *trim_dquotes(const char *str) {
         return NULL;
     for (begin = 0; str[begin] == '"' && str[begin] != '\0'; begin++)
     ;
-    for (end = mx_strlen(str); str[end - 1] == '"' && end >= 0; end--)
+    for (end = mx_strlen(str);end > 0 && str[end - 1] == '"'; end--)
     ;
 
     for (int i = 0; str[i] == '"'; i++) {
