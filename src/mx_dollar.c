@@ -39,6 +39,7 @@ char *mx_dollar(char *line) {
 
     if (line && mx_strlen(line) > 1) {
         count = mx_check_quotes(line, '$');
+
         if (count == 100)
             return line;
         if (count >= 0) {
@@ -47,6 +48,10 @@ char *mx_dollar(char *line) {
             env = open_dollar(&line[count + 1]);
             if (work_str && env) {
                 full_str = mx_three_to_one(mx_strtrim(work_str), " ", mx_strtrim(env));
+                return full_str;
+            }
+            else if (!work_str) {
+                full_str = mx_strdup(mx_strtrim(env));
                 return full_str;
             }
         }
