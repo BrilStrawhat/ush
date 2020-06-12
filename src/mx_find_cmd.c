@@ -12,24 +12,30 @@ char *mx_three_to_one(char *first_part, char *text, char *second_part) {
     return result;
 }
 
+t_list **mx_jobs_list(void) {
+   static t_list *jobs = NULL; 
+
+   return &jobs;
+}
+
 int mx_check_builtin(st_launch *l_inf, t_shell *shell) {
-    static t_list *jobs = NULL;
+    t_list **jobs = mx_jobs_list();
 
     for(int i = 0; shell->builtins[i]; i++) 
         if (strcmp(shell->builtins[i], l_inf->cmd_arr[0]) == 0) {
-            mx_start_builtin(l_inf, &jobs, shell);
+            mx_start_builtin(l_inf, jobs, shell);
             return 1;
         }
     mx_find_filepath(l_inf->cmd_arr, &l_inf->filepath, NULL);
     if (l_inf->filepath == NULL && l_inf->cmd_arr != NULL) {
         for (int i = 0; l_inf->cmd_arr[0][i]; i++) {
             if (l_inf->cmd_arr[0][i] == '/')
-                return mx_exec_prog(l_inf, &jobs);
+                return mx_exec_prog(l_inf, jobs);
         }
         mx_printerr("ush: command ");
         mx_printerr(l_inf->cmd_arr[0]);
         mx_printerr(" not found\n");
         return -1;
     }
-    return mx_exec_prog(l_inf, &jobs);
+    return mx_exec_prog(l_inf, jobs);
 }

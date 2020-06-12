@@ -13,6 +13,7 @@
 #include <sys/errno.h>
 #include <sys/stat.h>
 #include <dirent.h>
+#include <signal.h>
 
 extern char **environ;
 
@@ -102,7 +103,7 @@ int mx_strarr_len(char **strarr);
 char *mx_strarr_to_str(char **strarr, char *delim);
 char mx_check_link(char **path, char *full_path);
 char *path_constructor(char *path, char *fname);
-char  *includes_link_P(char *destination);
+char *includes_link_P(char *destination);
 
 // init t_shell info
 void mx_init_shell(t_shell *shell);
@@ -125,6 +126,8 @@ char *mx_find_filepath2(char *path);
 
 // fg
 int mx_fg(st_launch *l_inf, t_list **jobs);
+t_list** mx_jobs_list(void);
+int mx_free_job(t_job *job);
 
 // jobs
 int mx_jobs(t_list **jobs);

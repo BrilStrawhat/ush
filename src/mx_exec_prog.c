@@ -29,22 +29,65 @@ int mx_jobs(t_list **jobs) {
     return 0;
 }
 
+int mx_free_job(t_job *job) {
+    if (job == NULL) {
+        return 1;
+    }
+    mx_strdel(&job->cmd);
+    free(job);
+    return 0;
+}
+
+void mx_pop_front_job(t_list **jobs) {
+    t_list *cur = *jobs;
+
+    kill(((t_job*)((*jobs)->data))->pid, SIGCONT);
+    *jobs = (*jobs)->next; 
+    mx_free_job((t_job*)cur->data);
+    free(cur);
+}
+
 int mx_pop_job(t_list **jobs, int num) {
     if (jobs == NULL || *jobs == NULL)
         return 0;
     t_list *cur = *jobs;
     t_list *bef = NULL;
 
-    for (int i = 0; cur != NULL || i < num; i++)
-
-
+    for (int i = 1; cur != NULL && i <= num; i++) {
+        if (i == num) {
+            kill(((t_job*)((*jobs)->data))->pid, SIGCONT);
+            bef->next = cur->next;
+            mx_free_job((t_job*)cur->data);
+            free(cur);
+            return 0;
+        }
+        bef = cur;
+        cur = cur->next;
+    }
+    return 1;
 }
 
-int mx_fg(st_launch *l_inf, t_list **jobs, pid_t *pid) {
+int mx_cont_job(int num) {
+    t_list **cur = mx_jobs_list();
+
+    for (int i = 1; *cur != NULL && i <= num; i++) {
+        if (i == num) {
+            kill(((t_job*)((*cur)->data))->pid, SIGCONT);
+            return 0; 
+        }
+        *cur = (*cur)->next;
+    }
+    return 1;
+}
+
+int mx_fg(st_launch *l_inf, t_list **jobs) {
     if (jobs == NULL || *jobs == NULL)
         return 0;
-    mx_pop_job(jobs, atoi(l_inf->cmd_arr[1]));
-    return 0;
+    if (l_inf->cmd_arr[1] == NULL) {
+        return mx_cont_job(1);
+    }
+    
+    return mx_cont_job(atoi(l_inf->cmd_arr[1]));
 }
 
 
