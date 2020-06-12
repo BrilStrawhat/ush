@@ -91,15 +91,40 @@ static void print_hex(const char *str, int *j) {
     (*j)--; // high level loop will increment value again, rewrite this shit
 }
 
+
+// static char *trim_dquotes(const char *str) {
+//     int begin = 0;
+//     int end = 0;
+//     char *result = NULL;
+
+//     if (str == NULL)
+//         return NULL;
+//     for (begin = 0; str[begin] == '"' && str[begin] != '\0'; begin++)
+//     ;
+//     for (end = mx_strlen(str); str[end - 1] == '"' && end >= 0; end--)
+//     ;
+
+//     for (int i = 0; str[i] == '"'; i++) {
+//         if (str[i + 1] == '\0')
+//             return NULL;
+//     }
+//     result = mx_strnew((end - begin) + 1);
+//     result = mx_strncpy(result, str + begin, end - begin);
+//           //mx_printstr(result); exit(1);  thats moment ist good
+//     return result;
+// }
+
+
 static void print_flag_e(int argc, int i, char **argv) {
-    for (; i < argc; i++) {
-        for (int j = 0; argv[i][j] != '\0'; j++) {
-            if (argv[i][j] == '\\') {
+    for (; i < argc; i++) { 
+        for (int j = 0; argv[i] && argv[i][j] != '\0'; j++) {
+            if (argv[i][j] == '\\') { 
                 if (is_backslash_char(argv[i][j + 1]) == true) { 
                     replace_backslash_char(argv[i][j + 1], &j);
                     continue;
                 }
                 else if (argv[i][j + 1] == '0') {
+                    mx_printstr("4\n"); 
                     print_octal(argv[i], &j);
                     continue;
                 }
@@ -126,8 +151,18 @@ int mx_echo(char **argv) { // to many functions in file
         return 0;
     flag_parser(argc, argv, flags, &i);
     if (flags[2] == true ||
-       (flags[0] == false && flags[1] == false && flags[2] == false))
+       (flags[0] == false && flags[1] == false && flags[2] == false)) { 
+
+        // for (int k = 0; argv[k]; k++) {//////////////////
+        //     char *str = trim_dquotes(argv[k]);
+        //     mx_strdel(&argv[k]);
+        //     argv[k] = mx_strdup(str);
+        //     mx_strdel(&str);
+        // }//
+
+
         print_flag_e(argc, i, argv);
+       }
     else 
         while (i < argc) {
             mx_printstr(argv[i++]);

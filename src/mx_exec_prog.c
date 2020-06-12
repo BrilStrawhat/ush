@@ -31,8 +31,8 @@ int mx_exec_prog(st_launch *l_inf) { // Not auditor((
         return -1;
     }
     else if (pid == 0) { // Child process
-        if (execve(fp, l_inf->cmd_arr, environ) == -1) { 
-            print_error(l_inf);
+        if (execve(fp, l_inf->cmd_arr, environ) == -1) {
+            print_error(l_inf); // 
             return -1;
         }
     }

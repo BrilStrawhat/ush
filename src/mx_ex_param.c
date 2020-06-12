@@ -18,7 +18,7 @@ static int count_par(char *line) {
             if (line[i] && line[i] == '}')
                 count++;
             else
-                return -1;           
+                return -1;
         }
     }
     return count;
@@ -97,11 +97,12 @@ char *mx_ex_param(char *line) {
             ex_join(line, result, &res);
         }
     }
-    else if (count == -1) {
+    else if (count == -1) {                              // echo ${SHLVL} ${HOME} ${LOGNAME} ${USR} ${TERM} ; exit
         mx_strdel(&line);
         return NULL;
     }
-    else 
+    else {
         res = line;
+    }
     return res;
 }
