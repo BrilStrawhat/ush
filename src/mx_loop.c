@@ -49,7 +49,7 @@ void mx_loop(t_head *head) {
     mx_init_shell(shell);
     signal_for_parent();
     while (1) {
-        mx_check_jobs();
+        // mx_check_jobs();
         mx_printstr("u$h> ");
         line = read_line();
         if (!mx_strtrim(line))// new

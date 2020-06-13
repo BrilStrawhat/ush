@@ -38,13 +38,14 @@ int mx_free_job(t_job *job) {
     return 0;
 }
 
-void mx_pop_front_job(t_list **jobs) {
+int  mx_pop_front_job(t_list **jobs) {
     t_list *cur = *jobs;
 
     kill(((t_job*)((*jobs)->data))->pid, SIGCONT);
     *jobs = (*jobs)->next; 
     mx_free_job((t_job*)cur->data);
     free(cur);
+    return 0;
 }
 
 int mx_pop_job(t_list **jobs, int num) {
@@ -53,6 +54,8 @@ int mx_pop_job(t_list **jobs, int num) {
     t_list *cur = *jobs;
     t_list *bef = NULL;
 
+    if (num == 1)
+        return mx_pop_front_job(jobs);
     for (int i = 1; cur != NULL && i <= num; i++) {
         if (i == num) {
             kill(((t_job*)((*jobs)->data))->pid, SIGCONT);
@@ -69,11 +72,18 @@ int mx_pop_job(t_list **jobs, int num) {
 
 int mx_cont_job(int num) {
     t_list **cur = mx_jobs_list();
+    int status = 0;
 
     for (int i = 1; *cur != NULL && i <= num; i++) {
         if (i == num) {
             kill(((t_job*)((*cur)->data))->pid, SIGCONT);
-            return 0; 
+            waitpid(((t_job*)((*cur)->data))->pid, &status, WUNTRACED);
+            if (WIFSTOPPED(status) == true)
+                return 0;
+            else if (WIFEXITED(status) == true) {
+                mx_pop_job(cur, i);
+                return 0;
+            }
         }
         *cur = (*cur)->next;
     }
@@ -124,24 +134,55 @@ void signal_for_child(void) {
     signal(SIGTSTP, SIG_DFL);
 }
 
+void shti(void) {
+    signal(SIGINT, SIG_IGN); // C-c
+    signal(SIGQUIT, SIG_IGN);
+    signal(SIGTSTP, SIG_IGN);
+    signal(SIGCHLD, SIG_IGN);
+}
+
+void mx_set_ctrl_term(pid_t pid) {
+    tcsetpgrp(0, pid);
+    tcsetpgrp(1, pid);
+    tcsetpgrp(2, pid);
+}
+
 int mx_exec_prog(st_launch *l_inf, t_list **jobs) { // Not auditor((
     int status = 0;
     pid_t pid;
     char *fp = (l_inf->filepath != NULL) ? l_inf->filepath : l_inf->cmd_arr[0];
+    pid_t ppid = getpid();
 
+    mx_printstr("tot\n");
     if ((pid = fork()) < 0) {
         print_error(l_inf);
         return -1;
     }
     else if (pid == 0) { // Child process
+    mx_printstr("tot2\n");
         signal_for_child();
+        setpgid(getpid(), getpid());
+        mx_set_ctrl_term(getpid());
         if (execve(fp, l_inf->cmd_arr, environ) == -1) { 
             print_error(l_inf);
-            return -1;
+            exit(-1);
         }
     }
     else {
-        waitpid(pid, &status, WUNTRACED);
+    mx_printstr("tot3\n");
+    mx_printint(pid);
+    mx_printstr("\n");
+        mx_printstr(strerror(errno));
+        mx_printstr("\n");
+        if (waitpid(-1, &status, 0) < 0) {
+            mx_printstr(strerror(errno));
+            mx_printstr("\n");
+        }
+        else
+            mx_printstr("wait NO errro\n");
+    mx_printstr("tot4\n");
+        sleep(1);
+        mx_set_ctrl_term(ppid);
         if (WIFSTOPPED(status) == true)
             mx_add_to_list(l_inf, pid, jobs, status);
     }
