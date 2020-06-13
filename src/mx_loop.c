@@ -15,24 +15,24 @@ void mx_loop_echo(t_head *head) {
     bzero(shell, sizeof(t_shell));
 
     mx_init_shell(shell);
-        line = read_line();
-        if (!mx_strtrim(line))// new
-        line[strlen(line)-1] = '\0';
-        if (line) {
-            if (mx_check_line(line) == 1) {
-                mx_printstr("syntax error\n");
-            }
-            mx_pwd_replace(&line);
-        
-            head = mx_create_head(line);
-            
-            if (!head) { // new
-            }
-            if (line != NULL && head) {
-                mx_launch_cmd(head, shell);
-            }
-
+    line = read_line();
+    if (!mx_strtrim(line))
+    line[strlen(line)-1] = '\0';
+    if (line) {
+        if (mx_check_line(line) == 1) {
+            mx_printstr("syntax error\n");
         }
+        mx_pwd_replace(&line);
+    
+        head = mx_create_head(line);
+        
+    if (!head) { 
+        }
+        if (line != NULL && head) {
+            mx_launch_cmd(head, shell);
+        }
+
+    }
 }
 
 void mx_loop(t_head *head) {
