@@ -31,7 +31,7 @@ int mx_check_builtin(st_launch *l_inf, t_shell *shell) {
         for (int i = 0; l_inf->cmd_arr[0][i]; i++) {
             if (l_inf->cmd_arr[0][i] == '/')
                 *exit_st = mx_exec_prog(l_inf);
-                return 0;
+                return -1;
         }
         mx_printerr("ush: command ");
         mx_printerr(l_inf->cmd_arr[0]);
@@ -39,5 +39,5 @@ int mx_check_builtin(st_launch *l_inf, t_shell *shell) {
         return -1;
     }
     *exit_st = mx_exec_prog(l_inf);
-    return 0;
+    return -1;
 }
