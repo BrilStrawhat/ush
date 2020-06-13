@@ -91,30 +91,6 @@ static void print_hex(const char *str, int *j) {
     (*j)--; // high level loop will increment value again, rewrite this shit
 }
 
-
-// static char *trim_dquotes(const char *str) {
-//     int begin = 0;
-//     int end = 0;
-//     char *result = NULL;
-
-//     if (str == NULL)
-//         return NULL;
-//     for (begin = 0; str[begin] == '"' && str[begin] != '\0'; begin++)
-//     ;
-//     for (end = mx_strlen(str); str[end - 1] == '"' && end >= 0; end--)
-//     ;
-
-//     for (int i = 0; str[i] == '"'; i++) {
-//         if (str[i + 1] == '\0')
-//             return NULL;
-//     }
-//     result = mx_strnew((end - begin) + 1);
-//     result = mx_strncpy(result, str + begin, end - begin);
-//           //mx_printstr(result); exit(1);  thats moment ist good
-//     return result;
-// }
-
-
 static void print_flag_e(int argc, int i, char **argv) {
     for (; i < argc; i++) { 
         for (int j = 0; argv[i] && argv[i][j] != '\0'; j++) {
