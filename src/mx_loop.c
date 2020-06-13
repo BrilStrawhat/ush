@@ -7,6 +7,34 @@ static char *read_line(void) {
     getline(&tmp, &bufsize, stdin);
     return tmp;
 }
+
+void mx_loop_echo(t_head *head) {
+    char *line = NULL;
+    int status = 0;
+    t_shell *shell = (t_shell *)malloc(sizeof(t_shell));
+    bzero(shell, sizeof(t_shell));
+
+    mx_init_shell(shell);
+        line = read_line();
+        if (!mx_strtrim(line))// new
+        line[strlen(line)-1] = '\0';
+        if (line) {
+            if (mx_check_line(line) == 1) {
+                mx_printstr("syntax error\n");
+            }
+            mx_pwd_replace(&line);
+        
+            head = mx_create_head(line);
+            
+            if (!head) { // new
+            }
+            if (line != NULL && head) {
+                mx_launch_cmd(head, shell);
+            }
+
+        }
+}
+
 void mx_loop(t_head *head) {
     char *line = NULL;
     int status = 0;

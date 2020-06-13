@@ -58,6 +58,7 @@ typedef struct s_launch {
 void mx_loop(t_head *head);
 t_head *mx_create_head(char *line);
 char **mx_tok(char *line);
+void mx_loop_echo(t_head *head);
 // void mx_first_cat(char *line);
 
 t_cmd *mx_treefull(char *line);

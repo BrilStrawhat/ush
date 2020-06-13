@@ -101,5 +101,5 @@ int mx_which(st_launch *l_inf) {
             }
         }
     }
-    return -1;
+    return 0;
 }
