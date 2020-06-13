@@ -121,6 +121,7 @@ int mx_exit(st_launch *l_inf);
 int mx_which(st_launch *l_inf);
 int mx_find_filepath(char **cmd_arr, char **filepath, void *flags);
 char *mx_find_filepath2();
+bool mx_if_exec(char *filepath);
 
 // exit
 int *mx_exit_status(void);
