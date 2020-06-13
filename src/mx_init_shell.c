@@ -97,6 +97,4 @@ void mx_init_shell(t_shell *shell) {
     shell->export_variables = get_export();
     init_shlvl(shell);
     shell->builtins = mx_init_builtin();
-    //printf("SHLVL %s\n", getenv("SHLVL"));
-    //printf("PWD- %s\n", shell->pwd);
 }

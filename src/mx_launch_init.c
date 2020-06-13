@@ -1,26 +1,5 @@
 #include "ush.h"
 
-// static char *trim_dquotes(const char *str) {
-//     int begin = 0;
-//     int end = 0;
-//     char *result = NULL;
-
-//     if (str == NULL)
-//         return NULL;
-//     for (begin = 0; str[begin] == '"' && str[begin] != '\0'; begin++)
-//     ;
-//     for (end = mx_strlen(str); str[end - 1] == '"' && end >= 0; end--)
-//     ;
-
-//     for (int i = 0; str[i] == '"'; i++) {
-//         if (str[i + 1] == '\0')
-//             return NULL;
-//     }
-//     result = mx_strnew((end - begin) + 1);
-//     result = mx_strncpy(result, str + begin, end - begin);
-//     return result;
-// }
-
 
 static void auditor(int *bufsize, char ****toks) {
     (*bufsize) += 64;

@@ -27,9 +27,6 @@ static int count_par(char *line) {
 static char* open_braces(char *line, int beg, int end) {
     int len = end - beg;
     char *res = mx_strnew(len + 1);
-
-    //printf("len%d\n beg%d\n end%d\n", len, beg, end);
-
     for (int i = 0; i < len;)
         res[i++] = line[beg++];
 
@@ -96,7 +93,7 @@ char *mx_ex_param(char *line) {
             ex_join(line, result, &res);
         }
     }
-    else if (count == -1) {                              // echo ${SHLVL} ${HOME} ${LOGNAME} ${USR} ${TERM} ; exit
+    else if (count == -1) { 
         mx_strdel(&line);
         return NULL;
     }

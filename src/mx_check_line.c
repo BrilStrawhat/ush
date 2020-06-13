@@ -25,7 +25,7 @@ int mx_check_line(char *line) {
     for (; line[i]; i++) {
         if (mx_isspace(line[i]))
             continue;
-        if ((line[i] == '|' && line[i + 1] != '|') //if we have "pwd &" or "pwd |"   ====> it mistake
+        if ((line[i] == '|' && line[i + 1] != '|') 
         || (line[i] == '&' && line[i + 1] != '&'))
             return 1;
         if ((valid_operator(line, i) == 1) && flag == 0) {
@@ -39,6 +39,6 @@ int mx_check_line(char *line) {
         flag = 1;
     }
       if (i > 0 && (line[i - 1] == '&' || line[i - 1] == '|') && !line[i])
-       return 1;// new     if we have "pwd &&" or "pwd ||"   ====> it mistake
+       return 1;
     return 0;
 }

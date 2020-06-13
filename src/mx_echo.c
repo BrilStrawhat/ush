@@ -156,15 +156,6 @@ int mx_echo(char **argv) { // to many functions in file
     flag_parser(argc, argv, flags, &i);
     if (flags[2] == true ||
        (flags[0] == false && flags[1] == false && flags[2] == false)) { 
-
-        // for (int k = 0; argv[k]; k++) {//////////////////
-        //     char *str = trim_dquotes(argv[k]);
-        //     mx_strdel(&argv[k]);
-        //     argv[k] = mx_strdup(str);
-        //     mx_strdel(&str);
-        // }//
-
-
         print_flag_e(argc, i, argv);
        }
     else 

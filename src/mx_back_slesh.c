@@ -1,11 +1,5 @@
 #include "ush.h"
 
-/*
-while (mx_back_slesh(s, &value)) {        ----->you need use it with function
-         mx_back_slesh(s, &value);
-    }
-    */
-   
 static int get_char_index(const char *str, char c, int *value) {
 	if (str == NULL)
 		return -2;

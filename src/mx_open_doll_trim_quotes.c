@@ -42,14 +42,8 @@ void mx_open_doll_trim_quotes(char ***command) {
         check_dollar(str, &kk);
         while (kk) {
             char *tmp = NULL;
-            tmp = mx_dollar(str);////////NEWs
-            // mx_printstr(tmp);
-            //mx_printchar('\n');
-            //mx_strdel(&cmd);
+            tmp = mx_dollar(str);
             str = mx_strdup(tmp);
-            //mx_strdel(&tmp);
-            //mx_printstr(cmd);
-            //mx_printchar('\n');
             kk--;
         }
         (*command)[k] = mx_strdup(str);

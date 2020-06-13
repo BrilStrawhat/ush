@@ -54,21 +54,8 @@ void mx_loop(t_head *head) {
                 status = 258;// errno
                 continue;
             }
-            mx_pwd_replace(&line);
-        // line = valid ${}
-            /*line = mx_ex_param(line);
-            if (!line) {
-                mx_printerr("error param {}\n");// after error
-                continue;
-            }
-        */
-           //mx_tilda(&line);  NEED TO FIX//////////////////////////////////////////////////////////
-           //char *new = mx_dollar(line);
-           //mx_printstr(new);
-        
+            mx_pwd_replace(&line);        
             head = mx_create_head(line);
-            
-            //mx_printforest(head);
             if (!head) { // new
                 continue;
             }
@@ -76,7 +63,6 @@ void mx_loop(t_head *head) {
                 mx_launch_cmd(head, shell);
                 continue;
             }
-
         }
     }
 }

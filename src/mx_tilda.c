@@ -55,13 +55,10 @@ static void tilda_user(char **line) {
             res[r++] = (*line)[i];  
         mx_strdel(line);
         (*line) = res;
-        //mx_strdel(&res); probably we  have leaks
     }
 }
 
 void mx_tilda(char **s) {
-   // int value = 0;
-
     if ((*s)[0] == '~') {
         if (!mx_strncmp("~-/", (*s), 3) || !mx_strncmp("~-", (*s), 3))
             tilda_minus(s);
@@ -72,7 +69,5 @@ void mx_tilda(char **s) {
         else if (mx_get_char_index((*s), '/'))
             tilda_user(s);
     }
-   // while (mx_back_slesh(s, &value))
-   //     mx_back_slesh(s, &value);
     mx_printstr((*s)); mx_printchar('\n'); /// example
 }

@@ -27,29 +27,6 @@ static char **create_artree(char *tok) {
     return mx_fill_str(tok, count);
 }
 
-   /*
-    int count = 1;
-    int i = 0;
-    int j = 0;
-    char **tmp = NULL;
-
-    for (i = 0; tok[i]; i++)
-        if (tok[i] == '&' && tok[i + 1] == '&')
-            count++;
-    tmp = malloc((count + 1) * sizeof(char *));
-    for (i = 0; tok[i]; i++) {
-        if (tok[i] == '&' && tok[i + 1] == '&') {
-            tmp[j] = mx_strndup(tok, i);
-            tok += i + 2;
-            i = 0;
-            j++;
-        }
-    }
-    tmp[j] = mx_strndup(tok, i);
-    tmp[j+1] = NULL;
-    return tmp; */
-
-
 t_cmd *mx_create_cmd(char *cmd, int i) {
     t_cmd *tr = malloc(sizeof(t_cmd));
     char *temp = NULL;
