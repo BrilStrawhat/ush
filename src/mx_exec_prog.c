@@ -138,7 +138,6 @@ void shti(void) {
     signal(SIGINT, SIG_IGN); // C-c
     signal(SIGQUIT, SIG_IGN);
     signal(SIGTSTP, SIG_IGN);
-    signal(SIGCHLD, SIG_IGN);
 }
 
 void mx_set_ctrl_term(pid_t pid) {
@@ -153,35 +152,25 @@ int mx_exec_prog(st_launch *l_inf, t_list **jobs) { // Not auditor((
     char *fp = (l_inf->filepath != NULL) ? l_inf->filepath : l_inf->cmd_arr[0];
     pid_t ppid = getpid();
 
-    mx_printstr("tot\n");
     if ((pid = fork()) < 0) {
         print_error(l_inf);
         return -1;
     }
     else if (pid == 0) { // Child process
-    mx_printstr("tot2\n");
         signal_for_child();
-        setpgid(getpid(), getpid());
         mx_set_ctrl_term(getpid());
+        setpgid(getpid(), getpid());
         if (execve(fp, l_inf->cmd_arr, environ) == -1) { 
             print_error(l_inf);
             exit(-1);
         }
     }
     else {
-    mx_printstr("tot3\n");
-    mx_printint(pid);
-    mx_printstr("\n");
-        mx_printstr(strerror(errno));
-        mx_printstr("\n");
-        if (waitpid(-1, &status, 0) < 0) {
+        if (waitpid(pid, &status, 0) < 0) {
             mx_printstr(strerror(errno));
             mx_printstr("\n");
         }
-        else
-            mx_printstr("wait NO errro\n");
-    mx_printstr("tot4\n");
-        sleep(1);
+        // shti();
         mx_set_ctrl_term(ppid);
         if (WIFSTOPPED(status) == true)
             mx_add_to_list(l_inf, pid, jobs, status);
