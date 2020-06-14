@@ -65,6 +65,7 @@ typedef struct s_job {
 void mx_loop(t_head *head);
 t_head *mx_create_head(char *line);
 char **mx_tok(char *line);
+void mx_loop_echo(t_head *head);
 // void mx_first_cat(char *line);
 
 t_cmd *mx_treefull(char *line);
@@ -83,6 +84,9 @@ char **mx_fill_str(char *tok, int count);
 void mx_launch_cmd(t_head *forest, t_shell *shell);
 st_launch *mx_launch_init(char *cmd, t_shell *shell);
 char *mx_three_to_one(char *first_part, char *text, char *second_part);
+char *mx_dollar(char *line);
+void mx_pwd_replace(char **iline);
+void mx_open_doll_trim_quotes(char ***command);
 
 //builtins
 int mx_check_builtin(st_launch *l_inf, t_shell *shell);
@@ -118,13 +122,13 @@ int mx_echo(char **argv);
 // export, import and exit
 int mx_export(st_launch *l_inf);
 int mx_unset(st_launch *l_inf);
+int mx_exit(st_launch *l_inf);
 
 // which
 int mx_which(st_launch *l_inf);
 int mx_find_filepath(char **cmd_arr, char **filepath, void *flags);
-char *mx_find_filepath2(char *path);
+char *mx_find_filepath2();
 
-// fg && jobs
 int mx_fg(st_launch *l_inf, t_list **jobs);
 t_list** mx_jobs_list(void);
 int mx_free_job(t_job *job);
@@ -133,5 +137,8 @@ void mx_add_to_list(st_launch *l_inf, pid_t pid, t_list **jobs, int status);
 void mx_set_ctrl_term(pid_t pid);
 int mx_pop_job(t_list **jobs, int num);
 int mx_cont_job_by_name(t_list **jobs, char *cmd);
+
+// exit
+int *mx_exit_status(void);
 
 #endif

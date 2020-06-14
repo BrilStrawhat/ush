@@ -11,17 +11,25 @@ void mx_set_ctrl_term(pid_t pid) {
     }
 }
 
-static void print_error(st_launch *l_inf) {
-    if (errno == ENOENT) {
-        mx_printerr("ush: command ");
-        mx_printerr(l_inf->cmd_arr[0]);
-        mx_printerr(" not found\n");
-    }
-    else {
-        mx_printerr("ush: ");
-        mx_printstr(strerror(errno));
-        mx_printchar('\n');
-    }
+static void print_error(st_launch *l_inf) {                                       
+    struct stat path_stat;                                                        
+                                  
+    stat(l_inf->cmd_arr[0], &path_stat);                                          
+    if (S_ISDIR(path_stat.st_mode)) {                                             
+        mx_printerr("ush: ");                                                     
+        mx_printerr(l_inf->cmd_arr[0]);                                           
+        mx_printerr(": Is a directory\n");                                        
+    }                                                                             
+    else if (errno == ENOENT) {                                                   
+        mx_printerr("ush: command ");                                             
+        mx_printerr(l_inf->cmd_arr[0]);                                           
+        mx_printerr(" not found\n");                                              
+    }                                                                             
+    else {                                                                        
+        mx_printerr("ush: ");                                                     
+        mx_printstr(strerror(errno));                                             
+        mx_printchar('\n');                                                       
+    }                                                                             
 }
 
 void signal_for_child(void) {
@@ -31,7 +39,7 @@ void signal_for_child(void) {
     signal(SIGTTIN, SIG_DFL); // for move of terminals
 }
 
-int mx_exec_prog(st_launch *l_inf, t_list **jobs) { // Not auditor((
+int mx_exec_prog(st_launch *l_inf, t_list **jobs) {
     int status = 0;
     pid_t pid;
     char *fp = (l_inf->filepath != NULL) ? l_inf->filepath : l_inf->cmd_arr[0];
@@ -52,5 +60,5 @@ int mx_exec_prog(st_launch *l_inf, t_list **jobs) { // Not auditor((
         if (WIFSTOPPED(status) == true)
             mx_add_to_list(l_inf, pid, jobs, status);
     }
-    return status;
+    return WEXITSTATUS(status);
 }

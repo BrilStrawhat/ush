@@ -1,6 +1,6 @@
 #include "ush.h"
 
-char *mx_find_filepath2(char *path) {
+char *mx_find_filepath2() {
     char *pathbuf;
            size_t n;
 

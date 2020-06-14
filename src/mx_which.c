@@ -60,7 +60,7 @@ int mx_find_filepath(char **cmd_arr, char **filepath, void *flags) {
     DIR *dptr;
 
     if (path == NULL)
-        path = mx_find_filepath2(path);
+        path = mx_find_filepath2();
     if (path != NULL) {
         path = mx_strdup(path);
         for (char *tok = strtok(path, ":"); tok; tok = strtok(NULL, ":")) {
@@ -69,7 +69,7 @@ int mx_find_filepath(char **cmd_arr, char **filepath, void *flags) {
                     if (strcmp(ds->d_name, cmd_arr[0]) == 0) {
                         *filepath = mx_three_to_one(tok, "/", ds->d_name);
                         if (costil_auditor(filepath, flags, dptr, &path) == 0)
-                            return 0;
+                            return 1;
                     }
                 }
                 closedir(dptr);
@@ -101,5 +101,5 @@ int mx_which(st_launch *l_inf) {
             }
         }
     }
-    return -1;
+    return 0;
 }

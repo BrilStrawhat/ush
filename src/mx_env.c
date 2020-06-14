@@ -84,5 +84,7 @@ int mx_env(st_launch *l_inf, t_shell *shell) {
         setenv("PATH", new_path, 1);
     if (new_path)
         free(new_path);
+    if (n < 0)
+        return 1;
     return 0;
 }
