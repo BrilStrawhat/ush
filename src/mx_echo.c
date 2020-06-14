@@ -21,6 +21,8 @@ static void flag_parser(int argc, char **argv, bool *flags, int *i) {
         else 
             break;
     }
+    if (flags[1] == false && flags[2] == false)
+        flags[1] = true;
     regfree(&preg);
 }
 

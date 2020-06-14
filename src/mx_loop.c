@@ -31,7 +31,6 @@ void mx_loop_echo(t_head *head) {
         if (line != NULL && head) {
             mx_launch_cmd(head, shell);
         }
-
     }
 }
 

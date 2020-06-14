@@ -66,7 +66,6 @@ static void ex_join(char *line, char *old_str, char **new_str) {
 
     for (int y = 0; line[y]; y++) {
         if (line[y+1] && line[y] == '$' && line[y+1] == '{') {
-            mx_printstr("Hello\n");
             cup = getenv(old_str);
             if (cup != NULL) {
                 for (int j = 0; cup[j]; j++)
