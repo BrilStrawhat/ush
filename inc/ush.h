@@ -124,12 +124,14 @@ int mx_which(st_launch *l_inf);
 int mx_find_filepath(char **cmd_arr, char **filepath, void *flags);
 char *mx_find_filepath2(char *path);
 
-// fg
+// fg && jobs
 int mx_fg(st_launch *l_inf, t_list **jobs);
 t_list** mx_jobs_list(void);
 int mx_free_job(t_job *job);
-
-// jobs
 int mx_jobs(t_list **jobs);
+void mx_add_to_list(st_launch *l_inf, pid_t pid, t_list **jobs, int status);
+void mx_set_ctrl_term(pid_t pid);
+int mx_pop_job(t_list **jobs, int num);
+int mx_cont_job_by_name(t_list **jobs, char *cmd);
 
 #endif
