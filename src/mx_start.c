@@ -1,6 +1,6 @@
 #include "ush.h"
 
-int  mx_start_builtin(st_launch *l_inf, t_shell *shell) {
+int  mx_start_builtin(st_launch *l_inf, t_list **jobs, t_shell *shell) {
     int *exit_st = mx_exit_status();
 
      for (int i = 0; shell->builtins[i]; i++) {
