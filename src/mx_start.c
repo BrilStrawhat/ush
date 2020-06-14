@@ -1,7 +1,8 @@
 #include "ush.h"
 
-int  mx_start_builtin(st_launch *l_inf, t_shell *shell) {
+int  mx_start_builtin(st_launch *l_inf, t_list **jobs, t_shell *shell) {
     int *exit_st = mx_exit_status();
+
      for (int i = 0; shell->builtins[i]; i++) {
         if (strcmp(l_inf->cmd_arr[0], shell->builtins[i]) == 0) {
           if (strcmp("env", shell->builtins[i]) == 0)
@@ -18,6 +19,10 @@ int  mx_start_builtin(st_launch *l_inf, t_shell *shell) {
                return mx_export(l_inf);
           else if (strcmp("unset", shell->builtins[i]) == 0)
                return mx_unset(l_inf);
+          else if (strcmp("fg", shell->builtins[i]) == 0)
+               return mx_fg(l_inf, jobs);
+          else if (strcmp("jobs", shell->builtins[i]) == 0)
+               return mx_jobs(jobs);
           else if (strcmp("exit", shell->builtins[i]) == 0)
                return mx_exit(l_inf);
         }

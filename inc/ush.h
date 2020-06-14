@@ -13,6 +13,7 @@
 #include <sys/errno.h>
 #include <sys/stat.h>
 #include <dirent.h>
+#include <signal.h>
 
 extern char **environ;
 
@@ -54,6 +55,12 @@ typedef struct s_launch {
     int type; // no cmd found , builtin, binary      (alias, shell func)
 }              st_launch;
 
+typedef struct s_job {
+    char *cmd;
+    pid_t pid;
+    int status;
+}               t_job;
+
 
 void mx_loop(t_head *head);
 t_head *mx_create_head(char *line);
@@ -84,7 +91,7 @@ void mx_open_doll_trim_quotes(char ***command);
 //builtins
 int mx_check_builtin(st_launch *l_inf, t_shell *shell);
 void mx_start(st_launch *l_inf, t_shell *shell); // builtins and path
-int mx_start_builtin(st_launch *l_inf, t_shell *shell);
+int  mx_start_builtin(st_launch *l_inf, t_list **jobs, t_shell *shell);
 
 // env
 int mx_env(st_launch *l_inf, t_shell *shell);
@@ -100,14 +107,14 @@ int mx_strarr_len(char **strarr);
 char *mx_strarr_to_str(char **strarr, char *delim);
 char mx_check_link(char **path, char *full_path);
 char *path_constructor(char *path, char *fname);
-char  *includes_link_P(char *destination);
+char *includes_link_P(char *destination);
 
 // init t_shell info
 void mx_init_shell(t_shell *shell);
 void mx_push_variable(t_variables **list, void *name, void *value);
 
 // fork and exec
-int mx_exec_prog(st_launch *l_inf);
+int mx_exec_prog(st_launch *l_inf, t_list **jobs);
 
 // echo
 int mx_echo(char **argv);
@@ -122,6 +129,16 @@ int mx_which(st_launch *l_inf);
 int mx_find_filepath(char **cmd_arr, char **filepath, void *flags);
 char *mx_find_filepath2();
 
+int mx_fg(st_launch *l_inf, t_list **jobs);
+t_list** mx_jobs_list(void);
+int mx_free_job(t_job *job);
+int mx_jobs(t_list **jobs);
+void mx_add_to_list(st_launch *l_inf, pid_t pid, t_list **jobs, int status);
+void mx_set_ctrl_term(pid_t pid);
+int mx_pop_job(t_list **jobs, int num);
+int mx_cont_job_by_name(t_list **jobs, char *cmd);
+
 // exit
 int *mx_exit_status(void);
+
 #endif

@@ -8,6 +8,14 @@ static char *read_line(void) {
     return tmp;
 }
 
+static void signal_for_parent(void) {
+    signal(SIGINT, SIG_IGN); // C-c
+    signal(SIGQUIT, SIG_IGN);
+    signal(SIGTSTP, SIG_IGN);
+    signal(SIGTTIN, SIG_IGN); // for move of terminals
+    signal(SIGTTOU, SIG_IGN);
+}
+
 void mx_loop_echo(t_head *head) {
     char *line = NULL;
     int status = 0;
@@ -38,10 +46,12 @@ void mx_loop_echo(t_head *head) {
 void mx_loop(t_head *head) {
     char *line = NULL;
     int status = 0;
-    t_shell *shell = (t_shell *)malloc(sizeof(t_shell));
+    t_shell *shell = (t_shell*)malloc(sizeof(t_shell));
     bzero(shell, sizeof(t_shell));
+    setvbuf(stdout, NULL, _IONBF, 0); //for printf
 
     mx_init_shell(shell);
+    signal_for_parent();
     while (1) {
         mx_printstr("u$h> ");
         line = read_line();

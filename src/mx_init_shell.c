@@ -74,7 +74,8 @@ static void init_shlvl(t_shell *shell) {
 }
 
 static char **mx_init_builtin() {
-    char **builtins = malloc(10 * sizeof(char *));
+    char **builtins = malloc(11 * sizeof(char *));
+
     builtins[0] = "pwd";
     builtins[1] = "env";
     builtins[2] = "which";
@@ -84,12 +85,12 @@ static char **mx_init_builtin() {
     builtins[6] = "export";
     builtins[7] = "unset";
     builtins[8] = "exit";
-    builtins[9] = NULL;
+    builtins[9] = "jobs";
+    builtins[10] = NULL;
     return builtins;
 }
 
 void mx_init_shell(t_shell *shell) {
-    extern char **environ;
     setenv("PWD", getcwd(NULL, 0), 0); // инициализация pwd
     shell->env = environ;
     shell->pwd = get_pwd();

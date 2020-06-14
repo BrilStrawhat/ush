@@ -12,6 +12,12 @@ char *mx_three_to_one(char *first_part, char *text, char *second_part) {
     return result;
 }
 
+t_list **mx_jobs_list(void) {
+   static t_list *jobs = NULL; 
+
+   return &jobs;
+}
+
 int *mx_exit_status(void) {
     static int exit_status = 0;
 
@@ -20,24 +26,22 @@ int *mx_exit_status(void) {
 
 int mx_check_builtin(st_launch *l_inf, t_shell *shell) {
     int *exit_st = mx_exit_status();
+    t_list **jobs = mx_jobs_list();
 
     for(int i = 0; shell->builtins[i]; i++)
         if (strcmp(shell->builtins[i], l_inf->cmd_arr[0]) == 0) {
-            *exit_st = mx_start_builtin(l_inf, shell);
+            *exit_st = mx_start_builtin(l_inf, jobs, shell);
             return 0;
         }
     mx_find_filepath(l_inf->cmd_arr, &l_inf->filepath, NULL);
     if (l_inf->filepath == NULL && l_inf->cmd_arr != NULL) {
         for (int i = 0; l_inf->cmd_arr[0][i]; i++) {
-            if (l_inf->cmd_arr[0][i] == '/')
-                *exit_st = mx_exec_prog(l_inf);
+            if (l_inf->cmd_arr[0][i] == '/') {
+                *exit_st = mx_exec_prog(l_inf, jobs);
                 return -1;
+            }
         }
-        mx_printerr("ush: command ");
-        mx_printerr(l_inf->cmd_arr[0]);
-        mx_printerr(" not found\n");
-        return -1;
     }
-    *exit_st = mx_exec_prog(l_inf);
+    *exit_st = mx_exec_prog(l_inf, jobs);
     return -1;
 }
