@@ -52,33 +52,6 @@ st_launch *mx_launch_init(char *cmd, t_shell *shell) {
 // create_arr_args
     tokensize(cmd, &command, 64, 0);
     mx_open_doll_trim_quotes(&command);
-
-
-
-//     for (int k = 0; command[k]; k++) {//////////////////
-//             char *str = trim_dquotes(command[k]);
-//             mx_strdel(&command[k]);
-
-
-//  int kk = 0;
-//  check_dollar(str, &kk);
-//     while (kk) {
-//         char *tmp = NULL;
-//         tmp = mx_dollar(str);////////NEWs
-//        // mx_printstr(tmp);
-//         //mx_printchar('\n');
-//         //mx_strdel(&cmd);
-//         str = mx_strdup(tmp);
-//         //mx_strdel(&tmp);
-//         //mx_printstr(cmd);
-//         //mx_printchar('\n');
-//         kk--;
-// }
-//             command[k] = mx_strdup(str);
-//             mx_strdel(&str);
-//         }//
-
-
     l_inf->cmd_arr = command;
 //find cmd 
     if (l_inf->cmd_arr)
