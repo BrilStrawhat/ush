@@ -21,23 +21,9 @@ static void flag_parser(int argc, char **argv, bool *flags, int *i) {
         else 
             break;
     }
-    // if (flags[1] == false && flags[2] == false)
-    //     flags[1] = true;
+    if (flags[1] == false && flags[2] == false)
+        flags[1] = true;
     regfree(&preg);
-}
-
-static bool is_backslash_char(char c) {
-    if (c > 97 && c < 102)
-        return true;
-    else if (c == 'n')
-        return true;
-    else if (c == 'r')
-        return true;
-    else if (c == 't')
-        return true;
-    else if (c == 'v')
-        return true;
-    return false;
 }
 
 static void replace_backslash_char(char c, int *j) {
@@ -104,7 +90,6 @@ static void print_flag_e(int argc, int i, char **argv) {
                     continue;
                 }
                 else if (argv[i][j + 1] == '0') {
-                    mx_printstr("4\n"); 
                     print_octal(argv[i], &j);
                     continue;
                 }
@@ -120,29 +105,24 @@ static void print_flag_e(int argc, int i, char **argv) {
     }
 }
 
-
 int mx_echo(char **argv) { // to many functions in file
     bool flags[3] = {false}; // 0 is -n, 1 is -E, 2 is -e
     int i = 1;
     int argc = 0;
-    int *exit_st = mx_exit_status();
 
-    if (argv && argv[1] && argv[1][0] == '?') {
-        mx_printint(*exit_st);
-        mx_printchar('\n');
-        return 0;
-    }
+    if (argv && argv[1] && argv[1][0] == '?')
+        return mx_print_exit();
     for (; argv[argc] != NULL; argc++);
     if (argc < 2)
         return 0;
     flag_parser(argc, argv, flags, &i);
-    if (flags[2] == true ||
-       (flags[0] == false && flags[1] == false && flags[2] == false)) { 
+    if (flags[2] == true) 
         print_flag_e(argc, i, argv);
-       }
     else 
         while (i < argc) {
             mx_printstr(argv[i++]);
+            if (i != argc)
+                mx_printchar(' ');
         }
     if (flags[0] == false) 
         mx_printchar('\n');

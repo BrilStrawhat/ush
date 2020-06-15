@@ -118,6 +118,8 @@ int mx_exec_prog(st_launch *l_inf, t_list **jobs);
 
 // echo
 int mx_echo(char **argv);
+bool is_backslash_char(char c);
+int mx_print_exit(void);
 
 // export, import and exit
 int mx_export(st_launch *l_inf);
