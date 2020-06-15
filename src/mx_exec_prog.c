@@ -1,6 +1,8 @@
 #include "ush.h"
 
 void mx_set_ctrl_term(pid_t pid) {
+    if (!isatty(0))
+        return;
     if (tcsetpgrp(0, pid) < 0) {
         mx_printstr(strerror(errno));
         mx_printstr(" tcsetpgrp\n");

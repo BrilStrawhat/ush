@@ -1,5 +1,5 @@
 NAME	=	ush
-#CFLG	=	-std=c11 -Wall -Wextra -Werror -Wpedantic -g
+# CFLG	=	-std=c11 -Wall -Wextra -Werror -Wpedantic -g
 CFLG =	-std=c11 -Wall -Wextra -Werror -Wpedantic -g3 -fsanitize=address -fsanitize=undefined -Wno-unused-function -Wno-unused-parameter -Wno-unused-variable # Withou "unused" warning;
 # CFLG =	-std=c11 -Wall -Wextra -Werror -Wpedantic -g -Wno-unused-function -Wno-unused-parameter -Wno-unused-variable #Withou "unused" warning; To use leaks command;
 COMP	=	clang
@@ -24,8 +24,9 @@ SRC		=	main.c mx_loop.c mx_create_head.c mx_tok.c \
 			mx_export.c \
 			mx_fg.c \
 			mx_jobs_ctrl.c \
-		  mx_dollar.c mx_pwd_replace.c \
+			mx_dollar.c mx_pwd_replace.c \
 			mx_open_doll_trim_quotes.c \
+			mx_utils.c \
 
 
 SRCS	=	$(addprefix $(SRCD)/, $(SRC))
