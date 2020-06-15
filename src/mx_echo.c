@@ -115,7 +115,7 @@ static void print_flag_e(int argc, int i, char **argv) {
             }
             mx_printchar(argv[i][j]);
         }
-        if (argv[i + 1])
+        if (argv[i + 1] && argv[i + 1][0] != '\0')
             mx_printchar(' ');
     }
 }
