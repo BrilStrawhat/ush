@@ -135,9 +135,11 @@ static void print_flag_e(int argc, int i, char **argv) {
             }
             mx_printchar(argv[i][j]);
         }
-        mx_printchar(' ');
+        if (argv[i + 1])
+            mx_printchar(' ');
     }
 }
+
 
 int mx_echo(char **argv) { // to many functions in file
     bool flags[3] = {false}; // 0 is -n, 1 is -E, 2 is -e
@@ -145,7 +147,7 @@ int mx_echo(char **argv) { // to many functions in file
     int argc = 0;
     int *exit_st = mx_exit_status();
 
-    if (argv[1][0] == '?') {
+    if (argv && argv[1] && argv[1][0] == '?') {
         mx_printint(*exit_st);
         mx_printchar('\n');
         return 0;
@@ -156,15 +158,6 @@ int mx_echo(char **argv) { // to many functions in file
     flag_parser(argc, argv, flags, &i);
     if (flags[2] == true ||
        (flags[0] == false && flags[1] == false && flags[2] == false)) { 
-
-        // for (int k = 0; argv[k]; k++) {//////////////////
-        //     char *str = trim_dquotes(argv[k]);
-        //     mx_strdel(&argv[k]);
-        //     argv[k] = mx_strdup(str);
-        //     mx_strdel(&str);
-        // }//
-
-
         print_flag_e(argc, i, argv);
        }
     else 

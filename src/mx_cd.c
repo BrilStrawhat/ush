@@ -37,7 +37,7 @@ static char includes_link(char *destination) {
 static int change_dir(st_launch *l_inf, char *path) {
     char *link = NULL;
     if (!chdir(path)) {
-        if (strcmp(getenv("OLDPWD"), getenv("PWD")) != 0)
+        if (getenv("OLDPWD") && getenv("PWD") && strcmp(getenv("OLDPWD"), getenv("PWD")) != 0)
             setenv("OLDPWD", getenv("PWD"), 1);
         if (getcwd(NULL, 0))
             setenv("PWD", getcwd(NULL, 0), 1);
@@ -63,10 +63,10 @@ static int old_cd(st_launch *l_inf) {
             mx_printchar('\n');
             return change_dir(l_inf, getenv("OLDPWD"));
     }   
-        else {
-            mx_printerr("cd: OLDPWD not set\n");
-            return 1;
-        }
+    else {
+        mx_printerr("cd: OLDPWD not set\n");
+        return 1;
+    }
 }
 
 int mx_cd(st_launch *l_inf) {

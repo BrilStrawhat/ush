@@ -56,7 +56,7 @@ static char *len_par(char *line, int *len) {
                 if (param && getenv(param))
                     (*len) += mx_strlen(getenv(param));
                 else 
-                    return NULL;
+                    return "777";
             }
         }
      }
@@ -69,7 +69,6 @@ static void ex_join(char *line, char *old_str, char **new_str) {
 
     for (int y = 0; line[y]; y++) {
         if (line[y+1] && line[y] == '$' && line[y+1] == '{') {
-            mx_printstr("Hello\n");
             cup = getenv(old_str);
             if (cup != NULL) {
                 for (int j = 0; cup[j]; j++)
@@ -96,7 +95,7 @@ char *mx_ex_param(char *line) {
             ex_join(line, result, &res);
         }
     }
-    else if (count == -1) {                              // echo ${SHLVL} ${HOME} ${LOGNAME} ${USR} ${TERM} ; exit
+    else if (count == -1) {
         mx_strdel(&line);
         return NULL;
     }
