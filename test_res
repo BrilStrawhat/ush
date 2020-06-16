@@ -4,11 +4,7 @@
 4. command = 'which -s echo; echo 0 ; exit'. res = 
 5. command = 'cd .. ; pwd ; exit'. res = 
 6. command = 'cd / ; pwd ; exit'. res = 
-7. command = 'cd ../../../ ; cd - ; cd .. ; pwd ; exit'. res = 1c1,2
-< /Users
----
-> /Users/bdotsenko/Desktop/another/ush
-> /Users/bdotsenko/Desktop/another
+7. command = 'cd ../../../ ; cd - ; cd .. ; pwd ; exit'. res = 
 8. command = 'cd .. ; cd . ; pwd ; exit'. res = 
 9. command = 'cd /tmp ; pwd -L ; exit'. res = 
 10. command = 'cd /tmp ; pwd -P ; exit'. res = 
