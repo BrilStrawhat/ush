@@ -21,8 +21,8 @@ static void flag_parser(int argc, char **argv, bool *flags, int *i) {
         else 
             break;
     }
-    // if (flags[1] == false && flags[2] == false)
-    //     flags[1] = true;
+    if (flags[1] == false && flags[2] == false)
+        flags[1] = true;
     regfree(&preg);
 }
 
@@ -104,6 +104,8 @@ static void print_flag_e(int argc, int i, char **argv) {
             mx_printchar(' ');
     }
 }
+
+
 
 int mx_echo(char **argv) { // to many functions in file
     bool flags[3] = {false}; // 0 is -n, 1 is -E, 2 is -e
