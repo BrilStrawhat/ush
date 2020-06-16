@@ -23,12 +23,12 @@ static char *open_dollar(char *old_str) {
     if (env) {
         resul_env = getenv(env);
         if (resul_env != NULL) {
-            return_env = mx_three_to_one(mx_strtrim(resul_env), " ", mx_strtrim(&old_str[i]));
+            return_env = mx_three_to_one(mx_strtrim(resul_env), "", mx_strtrim(&old_str[i]));
             mx_strdel(&env);
             return return_env;
         }
     }
-    return old_str;
+    return "\0";
 }
 
 char *mx_dollar(char *line) {
