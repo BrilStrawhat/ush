@@ -21,14 +21,16 @@ static char *open_dollar(char *old_str) {
         env[i] = old_str[i];
     }
     if (env) {
-        resul_env = getenv(env);
+        resul_env = getenv(old_str);
         if (resul_env != NULL) {
             return_env = mx_three_to_one(mx_strtrim(resul_env), "", mx_strtrim(&old_str[i]));
             mx_strdel(&env);
             return return_env;
         }
     }
-    return "\0";
+    if (strcmp(old_str, "?") !=0)
+        return "\0";
+    return old_str;
 }
 
 char *mx_dollar(char *line) {
