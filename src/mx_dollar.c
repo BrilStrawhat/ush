@@ -39,7 +39,7 @@ char *mx_dollar(char *line) {
 
     if (line && mx_strlen(line) > 1) {
         count = mx_check_quotes(line, '$');
-
+   // if (line[count] &&count > 0 && line[count + 1] != '{') {///
         if (count == 100)
             return line;
         if (count >= 0) {
@@ -55,6 +55,7 @@ char *mx_dollar(char *line) {
                 return full_str;
             }
         }
+   // }
     }
     return line;
 }

@@ -21,8 +21,8 @@ static void flag_parser(int argc, char **argv, bool *flags, int *i) {
         else 
             break;
     }
-    if (flags[1] == false && flags[2] == false)
-        flags[1] = true;
+    // if (flags[1] == false && flags[2] == false)
+    //     flags[1] = true;
     regfree(&preg);
 }
 
@@ -100,7 +100,7 @@ static void print_flag_e(int argc, int i, char **argv) {
             }
             mx_printchar(argv[i][j]);
         }
-        if (argv[i + 1] && argv[i + 1][0] != '\0')
+        if (argv[i + 1] && argv[i][0] != '\0')
             mx_printchar(' ');
     }
 }
